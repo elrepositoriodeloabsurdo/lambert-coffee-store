@@ -454,12 +454,6 @@ export default function App() {
       </section>
 
       <section id="productos" className="section">
-        <div className="section-heading">
-          <p className="eyebrow">Catalogo inicial</p>
-          <h2>Productos listos para editar</h2>
-          <p>Actualiza nombres, precios y formatos desde el arreglo `products` en `src/App.tsx`.</p>
-        </div>
-
         <div className="product-grid">
           {products.map((product) => (
             <article className="product-card" key={product.id}>
