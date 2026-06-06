@@ -169,19 +169,7 @@ textarea {
 }
 
 .accessories .carousel {
-  max-width: 1320px;
-}
-
-.accessories-track {
-  grid-auto-columns: calc((100% - 90px) / 6);
-}
-
-.accessories-track .carousel-img {
-  height: 200px;
-}
-
-.accessories-track .carousel-card figcaption strong {
-  font-size: 1.15rem;
+  max-width: 1180px;
 }
 
 .carousel-card {
@@ -661,14 +649,6 @@ textarea {
   .carousel-track {
     grid-auto-columns: calc((100% - 18px) / 2);
   }
-
-  .accessories-track {
-    grid-auto-columns: calc((100% - 54px) / 3);
-  }
-
-  .accessories-track .carousel-img {
-    height: 170px;
-  }
 }
 
 @media (max-width: 560px) {
@@ -678,14 +658,6 @@ textarea {
 
   .carousel-track {
     grid-auto-columns: 85%;
-  }
-
-  .accessories-track {
-    grid-auto-columns: calc((100% - 18px) / 2);
-  }
-
-  .accessories-track .carousel-img {
-    height: 150px;
   }
 
   .carousel-img {

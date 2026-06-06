@@ -112,6 +112,37 @@ const accessories: GalleryItem[] = [
   },
 ];
 
+const teas: GalleryItem[] = [
+  {
+    id: 'te-blue-collection',
+    name: 'Basilur Blue Tea',
+    type: 'Te verde premium',
+    color: 'Blue Collection',
+    image: '/assets/te-basilur-blue-collection.jpg',
+  },
+  {
+    id: 'te-blue-akbar',
+    name: 'Akbar Flavoured',
+    type: 'Caramelo / Manzana',
+    color: 'Surtido',
+    image: '/assets/te-basilur-blue-akbar.jpg',
+  },
+  {
+    id: 'te-bouquet',
+    name: 'Basilur Bouquet',
+    type: 'Ceylon Green Tea',
+    color: 'Jasmine / Cream Fantasy',
+    image: '/assets/te-basilur-bouquet.jpg',
+  },
+  {
+    id: 'te-magic-fruits',
+    name: 'Basilur Magic',
+    type: 'Ceylon Black Tea',
+    color: 'Fruits / Nights',
+    image: '/assets/te-basilur-magic-fruits.jpg',
+  },
+];
+
 type Product = {
   id: string;
   name: string;
@@ -177,6 +208,7 @@ export default function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const carouselRef = useRef<HTMLDivElement>(null);
   const accessoriesRef = useRef<HTMLDivElement>(null);
+  const teasRef = useRef<HTMLDivElement>(null);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('tuu');
   const [customer, setCustomer] = useState({
     name: '',
@@ -352,12 +384,12 @@ export default function App() {
           <button
             type="button"
             className="carousel-nav prev"
-            onClick={() => scrollCarousel(accessoriesRef, 6, -1)}
+            onClick={() => scrollCarousel(accessoriesRef, 3, -1)}
             aria-label="Anterior"
           >
             <ChevronLeft size={22} />
           </button>
-          <div className="carousel-track accessories-track" ref={accessoriesRef}>
+          <div className="carousel-track" ref={accessoriesRef}>
             {accessories.map((item) => (
               <figure className="carousel-card" key={item.id}>
                 <div className="carousel-img">
@@ -374,7 +406,46 @@ export default function App() {
           <button
             type="button"
             className="carousel-nav next"
-            onClick={() => scrollCarousel(accessoriesRef, 6, 1)}
+            onClick={() => scrollCarousel(accessoriesRef, 3, 1)}
+            aria-label="Siguiente"
+          >
+            <ChevronRight size={22} />
+          </button>
+        </div>
+      </section>
+
+      <section className="gallery teas">
+        <div className="gallery-head">
+          <p className="eyebrow">Seleccion de te</p>
+          <h2>Te</h2>
+        </div>
+        <div className="carousel">
+          <button
+            type="button"
+            className="carousel-nav prev"
+            onClick={() => scrollCarousel(teasRef, 3, -1)}
+            aria-label="Anterior"
+          >
+            <ChevronLeft size={22} />
+          </button>
+          <div className="carousel-track" ref={teasRef}>
+            {teas.map((item) => (
+              <figure className="carousel-card" key={item.id}>
+                <div className="carousel-img">
+                  <img src={item.image || '/placeholder.svg'} alt={`${item.name} ${item.color}`} />
+                </div>
+                <figcaption>
+                  <span className="carousel-type">{item.type}</span>
+                  <strong>{item.name}</strong>
+                  <span className="carousel-color">Color: {item.color}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <button
+            type="button"
+            className="carousel-nav next"
+            onClick={() => scrollCarousel(teasRef, 3, 1)}
             aria-label="Siguiente"
           >
             <ChevronRight size={22} />
