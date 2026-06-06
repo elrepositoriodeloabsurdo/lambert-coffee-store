@@ -1,6 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import {
   Banknote,
+  ChevronLeft,
+  ChevronRight,
   Coffee,
   CreditCard,
   MessageCircle,
@@ -9,7 +11,61 @@ import {
   ShieldCheck,
   ShoppingBag,
   Trash2,
+  User,
 } from 'lucide-react';
+
+type GalleryItem = {
+  id: string;
+  name: string;
+  type: string;
+  color: string;
+  image: string;
+};
+
+const gallery: GalleryItem[] = [
+  {
+    id: 'blend-latino-dorado',
+    name: 'Blend Latinoamericano',
+    type: 'Arabica + Robusta',
+    color: 'Dorado',
+    image: '/assets/blend-latinoamericano-dorado.jpg',
+  },
+  {
+    id: 'blend-latino-negro',
+    name: 'Blend Latinoamericano',
+    type: 'Arabica + Robusta',
+    color: 'Negro',
+    image: '/assets/blend-latinoamericano-negro.jpg',
+  },
+  {
+    id: 'colombia-huila-amarillo',
+    name: 'Colombia Huila',
+    type: 'Arabica - Caturra',
+    color: 'Amarillo',
+    image: '/assets/colombia-huila-amarillo.png',
+  },
+  {
+    id: 'arabica-crema',
+    name: 'Arabica',
+    type: 'Catuai Amarillo',
+    color: 'Crema',
+    image: '/assets/arabica-crema.jpg',
+  },
+  {
+    id: 'robusta-blanco',
+    name: 'Robusta',
+    type: 'Fazenda Venturim',
+    color: 'Blanco',
+    image: '/assets/robusta-blanco.jpg',
+  },
+  {
+    id: 'blend-dorado',
+    name: 'Blend Clasico',
+    type: 'Arabica 70% / Robusta 30%',
+    color: 'Dorado',
+    image: '/assets/blend-dorado.jpg',
+  },
+];
 
 type Product = {
   id: string;
@@ -74,6 +130,7 @@ const getProduct = (id: string) => products.find((product) => product.id === id)
 
 export default function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('tuu');
   const [customer, setCustomer] = useState({
     name: '',
@@ -122,6 +179,14 @@ export default function App() {
     setCart((current) => current.filter((item) => item.productId !== productId || item.format !== format));
   };
 
+  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+  const scrollCarousel = (direction: number) => {
+    const node = carouselRef.current;
+    if (!node) return;
+    node.scrollBy({ left: (node.clientWidth / 3) * direction, behavior: 'smooth' });
+  };
+
   const orderLines = cart
     .map((item) => {
       const product = getProduct(item.productId);
@@ -159,11 +224,55 @@ export default function App() {
           <a href="#checkout">Pago</a>
           <a href="#contacto">Contacto</a>
         </div>
-        <a className="icon-action" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">
-          <MessageCircle size={18} />
-          <span>WhatsApp</span>
-        </a>
+        <div className="topbar-actions">
+          <a className="icon-btn" href="#checkout" aria-label="Carrito de compra">
+            <ShoppingBag size={20} />
+            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+          </a>
+          <button type="button" className="icon-btn" aria-label="Cuenta de usuario">
+            <User size={20} />
+          </button>
+        </div>
       </nav>
+
+      <section className="gallery">
+        <div className="gallery-head">
+          <p className="eyebrow">Nuestra linea</p>
+          <h2>Cafes Lambert por tipo, color y nombre</h2>
+        </div>
+        <div className="carousel">
+          <button
+            type="button"
+            className="carousel-nav prev"
+            onClick={() => scrollCarousel(-1)}
+            aria-label="Anterior"
+          >
+            <ChevronLeft size={22} />
+          </button>
+          <div className="carousel-track" ref={carouselRef}>
+            {gallery.map((item) => (
+              <figure className="carousel-card" key={item.id}>
+                <div className="carousel-img">
+                  <img src={item.image || '/placeholder.svg'} alt={`${item.name} ${item.color}`} />
+                </div>
+                <figcaption>
+                  <span className="carousel-type">{item.type}</span>
+                  <strong>{item.name}</strong>
+                  <span className="carousel-color">Color: {item.color}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <button
+            type="button"
+            className="carousel-nav next"
+            onClick={() => scrollCarousel(1)}
+            aria-label="Siguiente"
+          >
+            <ChevronRight size={22} />
+          </button>
+        </div>
+      </section>
 
       <section id="inicio" className="hero">
         <video className="hero-video" src="/assets/lambert-hero.mp4" autoPlay muted loop playsInline />
