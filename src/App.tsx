@@ -67,6 +67,51 @@ const gallery: GalleryItem[] = [
   },
 ];
 
+const accessories: GalleryItem[] = [
+  {
+    id: 'acc-dripper-perro',
+    name: 'Cold Drip Perro',
+    type: 'Cold drip ceramica',
+    color: 'Turquesa',
+    image: '/assets/acc-dripper-perro.jpg',
+  },
+  {
+    id: 'acc-molino-vintage',
+    name: 'Molino Vintage CAFE',
+    type: 'Molino manivela',
+    color: 'Madera',
+    image: '/assets/acc-molino-vintage.jpg',
+  },
+  {
+    id: 'acc-teteras-vidrio',
+    name: 'Teteras de Vidrio',
+    type: 'Infusor acero',
+    color: 'Transparente',
+    image: '/assets/acc-teteras-vidrio.jpg',
+  },
+  {
+    id: 'acc-torre-cold-drip',
+    name: 'Torre Cold Drip',
+    type: 'Goteo lento',
+    color: 'Vidrio / Madera',
+    image: '/assets/acc-torre-cold-drip.jpg',
+  },
+  {
+    id: 'acc-tetera-ceramica',
+    name: 'Tetera Tea for One',
+    type: 'Ceramica pintada',
+    color: 'Rosa',
+    image: '/assets/acc-tetera-ceramica.jpg',
+  },
+  {
+    id: 'acc-molinos-manuales',
+    name: 'Molinos Manuales',
+    type: 'Molino portatil',
+    color: 'Acero / Negro',
+    image: '/assets/acc-molinos-manuales.jpg',
+  },
+];
+
 type Product = {
   id: string;
   name: string;
@@ -131,6 +176,7 @@ const getProduct = (id: string) => products.find((product) => product.id === id)
 export default function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const accessoriesRef = useRef<HTMLDivElement>(null);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('tuu');
   const [customer, setCustomer] = useState({
     name: '',
@@ -181,10 +227,10 @@ export default function App() {
 
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
-  const scrollCarousel = (direction: number) => {
-    const node = carouselRef.current;
+  const scrollCarousel = (ref: React.RefObject<HTMLDivElement | null>, perRow: number, direction: number) => {
+    const node = ref.current;
     if (!node) return;
-    node.scrollBy({ left: (node.clientWidth / 3) * direction, behavior: 'smooth' });
+    node.scrollBy({ left: (node.clientWidth / perRow) * direction, behavior: 'smooth' });
   };
 
   const orderLines = cart
@@ -235,6 +281,29 @@ export default function App() {
         </div>
       </nav>
 
+      <section id="inicio" className="hero">
+        <video className="hero-video" src="/assets/lambert-hero.mp4" autoPlay muted loop playsInline />
+        <div className="hero-overlay" />
+        <div className="hero-content">
+          <p className="eyebrow">Cafe de especialidad tostado en Chile</p>
+          <h1>Lambert Coffee</h1>
+          <p className="hero-copy">
+            Compra cafe en grano listo para moler en casa, oficina o cafeteria. Carrito listo para vender con
+            transferencia, WhatsApp, Tuu y Transbank.
+          </p>
+          <div className="hero-actions">
+            <a className="primary-btn" href="#productos">
+              <ShoppingBag size={18} />
+              Comprar cafe
+            </a>
+            <a className="secondary-btn" href="#checkout">
+              <CreditCard size={18} />
+              Ver pagos
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="gallery">
         <div className="gallery-head">
           <p className="eyebrow">Nuestra linea</p>
@@ -244,7 +313,7 @@ export default function App() {
           <button
             type="button"
             className="carousel-nav prev"
-            onClick={() => scrollCarousel(-1)}
+            onClick={() => scrollCarousel(carouselRef, 3, -1)}
             aria-label="Anterior"
           >
             <ChevronLeft size={22} />
@@ -266,7 +335,7 @@ export default function App() {
           <button
             type="button"
             className="carousel-nav next"
-            onClick={() => scrollCarousel(1)}
+            onClick={() => scrollCarousel(carouselRef, 3, 1)}
             aria-label="Siguiente"
           >
             <ChevronRight size={22} />
@@ -274,26 +343,42 @@ export default function App() {
         </div>
       </section>
 
-      <section id="inicio" className="hero">
-        <video className="hero-video" src="/assets/lambert-hero.mp4" autoPlay muted loop playsInline />
-        <div className="hero-overlay" />
-        <div className="hero-content">
-          <p className="eyebrow">Cafe de especialidad tostado en Chile</p>
-          <h1>Lambert Coffee</h1>
-          <p className="hero-copy">
-            Compra cafe en grano listo para moler en casa, oficina o cafeteria. Carrito listo para vender con
-            transferencia, WhatsApp, Tuu y Transbank.
-          </p>
-          <div className="hero-actions">
-            <a className="primary-btn" href="#productos">
-              <ShoppingBag size={18} />
-              Comprar cafe
-            </a>
-            <a className="secondary-btn" href="#checkout">
-              <CreditCard size={18} />
-              Ver pagos
-            </a>
+      <section className="gallery accessories">
+        <div className="gallery-head">
+          <p className="eyebrow">Gama de accesorios</p>
+          <h2>Accesorios de cafe Lambert</h2>
+        </div>
+        <div className="carousel">
+          <button
+            type="button"
+            className="carousel-nav prev"
+            onClick={() => scrollCarousel(accessoriesRef, 6, -1)}
+            aria-label="Anterior"
+          >
+            <ChevronLeft size={22} />
+          </button>
+          <div className="carousel-track accessories-track" ref={accessoriesRef}>
+            {accessories.map((item) => (
+              <figure className="carousel-card" key={item.id}>
+                <div className="carousel-img">
+                  <img src={item.image || '/placeholder.svg'} alt={`${item.name} ${item.color}`} />
+                </div>
+                <figcaption>
+                  <span className="carousel-type">{item.type}</span>
+                  <strong>{item.name}</strong>
+                  <span className="carousel-color">Color: {item.color}</span>
+                </figcaption>
+              </figure>
+            ))}
           </div>
+          <button
+            type="button"
+            className="carousel-nav next"
+            onClick={() => scrollCarousel(accessoriesRef, 6, 1)}
+            aria-label="Siguiente"
+          >
+            <ChevronRight size={22} />
+          </button>
         </div>
       </section>
 
