@@ -58,68 +58,68 @@ const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
 
 const products: Product[] = [
   {
-    id: 'colombia-huila',
-    name: 'Colombia Huila',
-    origin: 'Huila, Colombia',
-    label: 'Etiqueta dorada',
-    labelClass: 'gold-label',
-    profile: 'Caturra, chocolate y naranja',
-    description: 'Café de especialidad con acidez elegante, cuerpo sedoso y final dulce para filtrados premium.',
-    roast: 'Medio claro',
-    image: '/assets/colombia-huila-amarillo.png',
-    stock: 18,
-    prices: coffeePrices,
-  },
-  {
-    id: 'blend-latinoamericano',
-    name: 'Blend Latinoamericano',
-    origin: 'Latinoamérica',
-    label: 'Etiqueta dorada',
-    labelClass: 'gold-label',
-    profile: 'Cacao, miel y caramelo',
-    description: 'Mezcla balanceada para uso diario con crema estable, aroma tostado y sabor persistente.',
-    roast: 'Medio',
-    image: '/assets/blend-latinoamericano-dorado.jpg',
-    stock: 24,
-    prices: coffeePrices,
-  },
-  {
-    id: 'arabica-100',
-    name: 'Arábico 100%',
+    id: 'arabica-especialidad',
+    name: 'Café de Especialidad Arábica',
     origin: 'Catuai Amarillo',
-    label: 'Etiqueta blanca',
-    labelClass: 'white-label',
+    label: 'Empaque negro',
+    labelClass: 'dark-pack',
     profile: 'Chocolate, miel y caramelo',
-    description: 'Perfil limpio y aromático para espresso moderno, prensa francesa y molienda fresca en casa.',
+    description: 'Café arábica de especialidad con dulzor balanceado, notas de chocolate y final acaramelado.',
     roast: 'Medio',
     image: '/assets/arabica-crema.jpg',
     stock: 15,
     prices: coffeePrices,
   },
   {
-    id: 'blend-brasileno',
-    name: 'Blend Brasileño',
-    origin: 'Brasil',
-    label: 'Etiqueta negra',
-    labelClass: 'black-label',
+    id: 'colombia-huila',
+    name: 'Café de Especialidad Colombia Huila',
+    origin: 'Huila, Colombia',
+    label: 'Empaque dorado',
+    labelClass: 'gold-label',
+    profile: 'Chocolate y naranja',
+    description: 'Café de origen colombiano con acidez elegante, cuerpo sedoso y final dulce para filtrados premium.',
+    roast: 'Medio claro',
+    image: '/assets/colombia-huila-amarillo.png',
+    stock: 18,
+    prices: coffeePrices,
+  },
+  {
+    id: 'robusta-especialidad',
+    name: 'Café de Especialidad Robusta',
+    origin: 'Fazenda Venturim',
+    label: 'Empaque blanco',
+    labelClass: 'white-label',
     profile: 'Chocolate, avellana y frutos secos',
-    description: 'Café intenso, cremoso y de baja acidez para quienes buscan una taza con carácter.',
+    description: 'Robusta de especialidad con mayor cuerpo, potencia y rendimiento para espresso clásico.',
+    roast: 'Alto',
+    image: '/assets/robusta-blanco.jpg',
+    stock: 12,
+    prices: coffeePrices,
+  },
+  {
+    id: 'blend-especialidad',
+    name: 'Café de Especialidad Blend',
+    origin: 'Arábica 70% / Robusta 30%',
+    label: 'Empaque dorado',
+    labelClass: 'gold-label',
+    profile: 'Chocolate, miel, avellana y caramelo',
+    description: 'Blend intenso y cremoso con equilibrio entre dulzor arábica y cuerpo robusta.',
     roast: 'Medio alto',
     image: '/assets/blend-dorado.jpg',
     stock: 20,
     prices: coffeePrices,
   },
   {
-    id: 'robusta',
-    name: 'Robusta',
-    origin: 'Fazenda Venturim',
-    label: 'Empaque negro',
-    labelClass: 'dark-pack',
-    profile: 'Chocolate, avellana y frutos secos',
-    description: 'Mayor cuerpo, potencia y rendimiento para mezclas, espresso clásico y cafeteras automáticas.',
-    roast: 'Alto',
-    image: '/assets/robusta-blanco.jpg',
-    stock: 12,
+    id: 'blend-latinoamericano',
+    name: 'Café de Especialidad Blend Latinoamericano',
+    origin: 'Latinoamérica',
+    label: 'Empaque dorado',
+    labelClass: 'gold-label',
+    profile: 'Cacao, miel y caramelo',
+    description: 'Mezcla latinoamericana balanceada para uso diario con crema estable y sabor persistente.',
+    roast: 'Medio',
+    image: '/assets/blend-latinoamericano-dorado.jpg',
+    stock: 24,
     prices: coffeePrices,
   },
 ];
@@ -205,6 +205,19 @@ const workflowSteps = [
   { icon: ShoppingBag, title: 'Carrito dinámico', text: 'Miniatura, variedad, formato, cantidades, valor unitario y subtotal actualizado.' },
   { icon: Receipt, title: 'Facturación', text: 'Checkbox para solicitar factura con razón social, RUT empresa, giro y dirección tributaria.' },
   { icon: Truck, title: 'Post-compra', text: 'Número de compra, boleta o factura por correo y tracking automático del pedido.' },
+];
+
+const aiAgentModules = [
+  { icon: PackageCheck, title: 'Control de stock', text: 'Alertas por bajo inventario, reposición sugerida y bloqueo preventivo de productos sin unidades.' },
+  { icon: Receipt, title: 'Inventario y ventas', text: 'Lectura de carrito, rotación por variedad, formatos vendidos y resumen diario para administración.' },
+  { icon: Truck, title: 'Seguimiento de envíos', text: 'Estado del despacho, número de compra, enlace de tracking y aviso automático por WhatsApp o correo.' },
+  { icon: ShieldCheck, title: 'Verificación de pagos', text: 'Chequeo de pago por Transbank, TUU o transferencia antes de liberar preparación y despacho.' },
+];
+
+const aiAgentMetrics = [
+  { label: 'Productos monitoreados', value: products.length.toString() },
+  { label: 'Métodos de pago', value: '3 activos' },
+  { label: 'Canales de aviso', value: 'WhatsApp + email' },
 ];
 
 const formatCurrency = (value: number) =>
@@ -342,29 +355,26 @@ export default function App() {
           <img src="/assets/logo-lambert.jpg" alt="Lambert Coffee" />
           <span>Lambert Coffee</span>
         </a>
-        <div className="nav-links">
-          <a href="#catalogo">Catálogo</a>
-          <a href="#ia-stock">IA y stock</a>
-          <a href="#checkout">Checkout</a>
-        </div>
         <div className="topbar-actions">
-          <a className="icon-btn" href="#checkout" aria-label="Carrito de compra">
-            <ShoppingBag size={20} />
-            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-          </a>
-          <a className="icon-btn" href="#cuenta" aria-label="Cuenta de usuario">
+          <a className="icon-btn header-access" href="#cuenta" aria-label="Acceso de usuario">
             <User size={20} />
+            <span>Acceso</span>
+          </a>
+          <a className="icon-btn header-cart" href="#checkout" aria-label="Carrito de compra">
+            <ShoppingBag size={20} />
+            <span>Carro</span>
+            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </a>
         </div>
       </nav>
 
       <section id="inicio" className="hero">
-        <video className="hero-video" src="/assets/lambert-hero.mp4" autoPlay muted loop playsInline />
-        <div className="hero-overlay" />
-        <div className="hero-logo-card">
-          <img src="/assets/logo-lambert.jpg" alt="Logo Lambert Coffee" />
-          <span>Especialidad · Chile</span>
+        <div className="hero-video hero-brand-backdrop" aria-hidden="true">
+          <span>LAMBERT COFFEE</span>
+          <span>LAMBERT COFFEE</span>
+          <span>LAMBERT COFFEE</span>
         </div>
+        <div className="hero-overlay" />
         <div className="hero-content">
           <p className="eyebrow">Café de especialidad premium</p>
           <h1>Elegancia oscura, sabor dorado.</h1>
@@ -389,7 +399,7 @@ export default function App() {
         <div className="gallery-head">
           <p className="eyebrow">Carrusel 01</p>
           <h2>Café de Especialidad</h2>
-          <p>Cinco variedades con etiquetas visuales por presentación, origen y formato.</p>
+          <p>Cinco cafés integrados al carrusel: Arábica, Colombia Huila, Robusta, Blend y Blend Latinoamericano.</p>
         </div>
         {renderCarousel(
           products.map((product) => ({
@@ -462,21 +472,47 @@ export default function App() {
 
       <section id="ia-stock" className="section intelligence-section">
         <div className="ai-card">
-          <div>
-            <p className="eyebrow">Marcha blanca</p>
-            <h2>Agente IA de ventas y stock</h2>
+          <div className="ai-overview">
+            <p className="eyebrow">Agente operativo IA</p>
+            <h2>Control de stock, ventas, pagos y envíos</h2>
             <p>
-              El asistente queda anclado junto a WhatsApp para orientar compras, revisar disponibilidad de productos y
-              prevenir quiebres de stock durante la sincronización viva del inventario.
+              El agente IA centraliza la operación Lambert Coffee: monitorea inventario en tiempo real, resume ventas,
+              valida pagos por Transbank, TUU o transferencia y prepara alertas de seguimiento de envío para cada pedido.
             </p>
+            <div className="ai-metrics" aria-label="Indicadores del agente IA">
+              {aiAgentMetrics.map((metric) => (
+                <div key={metric.label}>
+                  <strong>{metric.value}</strong>
+                  <span>{metric.label}</span>
+                </div>
+              ))}
+            </div>
+            <a className="icon-action" href={`https://wa.me/${whatsappNumber}?text=Hola Lambert Coffee, necesito asistencia del agente IA para stock, ventas, pagos o envíos.`} target="_blank" rel="noreferrer">
+              <Bot size={18} /> Activar agente por WhatsApp
+            </a>
           </div>
-          <div className="stock-board">
-            {products.map((product) => (
-              <div key={product.id}>
-                <span>{product.name}</span>
-                <strong>{product.stock} disponibles</strong>
-              </div>
-            ))}
+
+          <div className="ai-operations">
+            <div className="ai-modules">
+              {aiAgentModules.map((module) => {
+                const Icon = module.icon;
+                return (
+                  <article key={module.title} className="ai-module-card">
+                    <Icon size={22} />
+                    <h3>{module.title}</h3>
+                    <p>{module.text}</p>
+                  </article>
+                );
+              })}
+            </div>
+            <div className="stock-board" aria-label="Inventario monitoreado por el agente IA">
+              {products.map((product) => (
+                <div key={product.id}>
+                  <span>{product.name}</span>
+                  <strong>{product.stock} disponibles</strong>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -698,12 +734,21 @@ export default function App() {
         </a>
       </section>
 
-      <div className="floating-actions" aria-label="Accesos rápidos">
+      <div className="floating-actions" aria-label="Agente IA, WhatsApp y métodos de pago">
         <a href="#ia-stock" className="float-btn ai-float">
-          <Bot size={20} /> IA Stock
+          <Bot size={20} /> Agente IA
         </a>
         <a href={`https://wa.me/${whatsappNumber}`} className="float-btn whatsapp-float" target="_blank" rel="noreferrer">
           <MessageCircle size={20} /> WhatsApp
+        </a>
+        <a href="#checkout" className="float-btn payment-float" onClick={() => setPaymentMethod('transbank')}>
+          <CreditCard size={20} /> Transbank
+        </a>
+        <a href="#checkout" className="float-btn payment-float" onClick={() => setPaymentMethod('tuu')}>
+          <CreditCard size={20} /> TUU
+        </a>
+        <a href="#checkout" className="float-btn transfer-float" onClick={() => setPaymentMethod('transfer')}>
+          <Banknote size={20} /> Transferencia
         </a>
       </div>
 

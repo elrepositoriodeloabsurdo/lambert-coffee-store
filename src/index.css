@@ -92,14 +92,12 @@ textarea {
   text-transform: uppercase;
 }
 
-.nav-links,
 .topbar-actions {
   align-items: center;
   display: flex;
-  gap: 16px;
+  gap: 12px;
 }
 
-.nav-links a,
 .eyebrow {
   color: var(--muted);
   font-size: 0.75rem;
@@ -108,22 +106,26 @@ textarea {
   text-transform: uppercase;
 }
 
-.nav-links a:hover {
-  color: var(--gold);
-}
-
 .icon-btn {
   align-items: center;
   background: rgba(240, 195, 90, 0.1);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 999px;
   color: var(--gold);
   display: inline-flex;
-  height: 44px;
+  gap: 8px;
+  min-height: 44px;
   justify-content: center;
+  padding: 0 14px;
   position: relative;
   transition: 180ms ease;
-  width: 44px;
+}
+
+.icon-btn span:not(.cart-badge) {
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .icon-btn:hover,
@@ -169,8 +171,49 @@ textarea {
 
 .hero-video {
   height: 100%;
-  object-fit: cover;
   width: 100%;
+}
+
+.hero-brand-backdrop {
+  align-content: center;
+  background:
+    radial-gradient(circle at 68% 30%, rgba(240, 195, 90, 0.24), transparent 22rem),
+    radial-gradient(circle at 22% 72%, rgba(184, 137, 45, 0.2), transparent 24rem),
+    linear-gradient(135deg, #050505 0%, #17110a 48%, #050505 100%);
+  display: grid;
+  gap: clamp(24px, 5vw, 54px);
+  justify-items: center;
+  overflow: hidden;
+}
+
+.hero-brand-backdrop::before {
+  background:
+    linear-gradient(115deg, transparent 0 38%, rgba(255, 217, 120, 0.2) 45%, transparent 54% 100%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 86px);
+  content: '';
+  inset: -20%;
+  position: absolute;
+  transform: rotate(-8deg);
+}
+
+.hero-brand-backdrop span {
+  color: rgba(255, 248, 232, 0.16);
+  font-size: clamp(3.8rem, 11vw, 10.5rem);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  line-height: 0.82;
+  position: relative;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hero-brand-backdrop span:nth-child(2) {
+  color: rgba(240, 195, 90, 0.24);
+  transform: translateX(-8vw);
+}
+
+.hero-brand-backdrop span:nth-child(3) {
+  transform: translateX(7vw);
 }
 
 .hero-overlay {
@@ -186,35 +229,6 @@ textarea {
   z-index: 2;
 }
 
-.hero-logo-card {
-  align-items: center;
-  background: rgba(5, 5, 5, 0.68);
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  box-shadow: var(--shadow);
-  display: grid;
-  gap: 14px;
-  justify-items: center;
-  padding: 22px;
-  position: absolute;
-  right: clamp(18px, 8vw, 120px);
-  top: 50%;
-  transform: translateY(-42%);
-  width: min(270px, 30vw);
-  z-index: 2;
-}
-
-.hero-logo-card img {
-  border-radius: 22px;
-  width: 100%;
-}
-
-.hero-logo-card span {
-  color: var(--gold);
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
 
 h1,
 h2,
@@ -553,14 +567,82 @@ h3 {
 }
 
 .ai-card {
-  align-items: center;
+  align-items: start;
   border-radius: 24px;
   display: grid;
   gap: 28px;
-  grid-template-columns: 1fr 0.85fr;
+  grid-template-columns: 0.82fr 1.18fr;
   margin: 0 auto;
   max-width: 1220px;
   padding: clamp(24px, 4vw, 44px);
+}
+
+.ai-overview {
+  display: grid;
+  gap: 18px;
+}
+
+.ai-metrics,
+.ai-modules {
+  display: grid;
+  gap: 12px;
+}
+
+.ai-metrics {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ai-metrics div,
+.ai-module-card {
+  background: var(--panel-soft);
+  border: 1px solid rgba(240, 195, 90, 0.14);
+  border-radius: 14px;
+}
+
+.ai-metrics div {
+  padding: 14px;
+}
+
+.ai-metrics strong,
+.ai-metrics span {
+  display: block;
+}
+
+.ai-metrics strong {
+  color: var(--gold);
+  font-size: 1.18rem;
+}
+
+.ai-metrics span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+.ai-operations {
+  display: grid;
+  gap: 16px;
+}
+
+.ai-modules {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ai-module-card {
+  padding: 18px;
+}
+
+.ai-module-card svg {
+  color: var(--gold);
+}
+
+.ai-module-card h3 {
+  font-size: 1.35rem;
+  margin: 12px 0 8px;
+}
+
+.ai-module-card p {
+  margin: 0;
 }
 
 .stock-board {
@@ -818,21 +900,29 @@ textarea:focus {
 }
 
 .floating-actions {
+  background: rgba(5, 5, 5, 0.82);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  border-radius: 999px;
   bottom: 22px;
+  box-shadow: var(--shadow);
   display: grid;
   gap: 10px;
+  grid-template-columns: repeat(5, auto);
+  left: 50%;
+  padding: 10px;
   position: fixed;
-  right: 22px;
+  transform: translateX(-50%);
   z-index: 30;
 }
 
 .float-btn {
   border-radius: 999px;
-  box-shadow: var(--shadow);
   font-weight: 900;
   justify-content: center;
   min-height: 48px;
   padding: 0 18px;
+  white-space: nowrap;
 }
 
 .ai-float {
@@ -844,6 +934,17 @@ textarea:focus {
 .whatsapp-float {
   background: #25d366;
   color: #061207;
+}
+
+.payment-float {
+  background: linear-gradient(135deg, var(--gold), #ffd978 48%, var(--gold-deep));
+  color: #130d05;
+}
+
+.transfer-float {
+  background: rgba(5, 5, 5, 0.88);
+  border: 1px solid var(--line);
+  color: var(--gold);
 }
 
 footer {
@@ -874,11 +975,6 @@ footer {
   .workflow-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .hero-logo-card {
-    opacity: 0.55;
-    right: 24px;
-  }
 }
 
 @media (max-width: 860px) {
@@ -888,20 +984,24 @@ footer {
     padding-top: 12px;
   }
 
-  .nav-links {
-    display: none;
-  }
-
   .brand span {
     font-size: 0.86rem;
   }
 
-  .hero {
-    padding-top: 112px;
+  .topbar-actions {
+    gap: 8px;
   }
 
-  .hero-logo-card {
-    display: none;
+  .icon-btn {
+    padding: 0 11px;
+  }
+
+  .icon-btn span:not(.cart-badge) {
+    font-size: 0.68rem;
+  }
+
+  .hero {
+    padding-top: 112px;
   }
 
   .carousel-track {
@@ -915,6 +1015,8 @@ footer {
   .product-grid,
   .workflow-grid,
   .ai-card,
+  .ai-metrics,
+  .ai-modules,
   .checkout-layout,
   .form-grid,
   .invoice-grid,
@@ -937,11 +1039,15 @@ footer {
   }
 
   .floating-actions {
+    border-radius: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     left: 16px;
     right: 16px;
+    transform: none;
   }
 
   .float-btn {
+    padding: 0 12px;
     width: 100%;
   }
 }
