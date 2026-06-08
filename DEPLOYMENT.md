@@ -83,6 +83,53 @@ npm run build
 
 ---
 
+
+
+## GitHub Pages Deploy
+
+This repository includes `.github/workflows/deploy-github-pages.yml`. To publish it:
+
+1. Push the repository to GitHub using the `main` branch.
+2. In **Settings → Pages**, choose **GitHub Actions** as the Pages source.
+3. Push to `main` or run the workflow manually.
+
+The workflow sets `VITE_BASE_PATH` to `/${{ github.event.repository.name }}/` so Vite assets work under the GitHub Pages subpath.
+
+## Vercel Deploy
+
+`vercel.json` is configured for Vite with `dist/` as output and SPA rewrites to `index.html`.
+
+Use the dashboard import flow or, if authenticated with the Vercel CLI, run:
+
+```bash
+npm run deploy:vercel
+```
+
+Optional environment variables:
+
+- `VITE_WHATSAPP_NUMBER`
+- `VITE_TUU_CHECKOUT_URL`
+- `VITE_TRANSBANK_CHECKOUT_URL`
+
+The app has demo fallbacks, so these variables are not required for a preview deploy.
+
+## Local Fullstack Deploy
+
+Use this option when you want to review the final design through a production Vite build served by a local Express backend.
+
+```bash
+npm install
+npm run deploy:local
+```
+
+Open `http://localhost:3000`. The command builds `dist/` and starts `server.ts`, which serves the React app and exposes local test APIs:
+
+- `GET /api/health`
+- `GET /api/inventory`
+- `POST /api/orders`
+
+To change the port, run for example `PORT=4000 npm run deploy:local` and open `http://localhost:4000`.
+
 ## Local Development
 
 ```bash
