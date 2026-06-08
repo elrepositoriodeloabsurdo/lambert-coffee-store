@@ -13,11 +13,12 @@ Proyecto web React + Vite listo para catalogo, carrito y checkout inicial.
 
 ## Configuracion
 
-1. Copia `.env.example` como `.env.local`.
-2. Cambia `VITE_WHATSAPP_NUMBER` por el numero real, sin `+`.
+1. Copia `.env.example` como `.env.local` si necesitas configurar enlaces opcionales.
+2. Cambia `VITE_HERO_VIDEO_URL` para reemplazar el video del hero. Puedes usar una URL publica (`https://...`) o subir un `.mp4` a `public/assets/` y referenciarlo como `/assets/nombre-del-video.mp4`. En Vercel, agregalo en **Settings > Environment Variables** y redeploya el proyecto para que el cambio quede publicado.
 3. Agrega `VITE_TUU_CHECKOUT_URL` si tienes link de checkout Tuu.
 4. Agrega `VITE_TRANSBANK_CHECKOUT_URL` si tienes un link o endpoint propio para Transbank.
 
+El numero de WhatsApp de contacto queda fijo en el codigo como `+56912345678`, por lo que Vercel no necesita una variable `VITE_WHATSAPP_NUMBER` para compilar.
 
 ## Despliegue fullstack local
 
@@ -50,3 +51,7 @@ npm run build
 ```
 
 La carpeta final para subir queda en `dist/`.
+
+## Referencia de origen
+
+Este proyecto fue inicializado desde AI Studio y luego adaptado para Lambert Coffee.
