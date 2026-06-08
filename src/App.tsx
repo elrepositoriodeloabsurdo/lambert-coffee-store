@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import {
   Banknote,
+  Bot,
   ChevronLeft,
   ChevronRight,
   Coffee,
@@ -204,6 +205,19 @@ const workflowSteps = [
   { icon: ShoppingBag, title: 'Carrito dinámico', text: 'Miniatura, variedad, formato, cantidades, valor unitario y subtotal actualizado.' },
   { icon: Receipt, title: 'Facturación', text: 'Checkbox para solicitar factura con razón social, RUT empresa, giro y dirección tributaria.' },
   { icon: Truck, title: 'Post-compra', text: 'Número de compra, boleta o factura por correo y tracking automático del pedido.' },
+];
+
+const aiAgentModules = [
+  { icon: PackageCheck, title: 'Control de stock', text: 'Alertas por bajo inventario, reposición sugerida y bloqueo preventivo de productos sin unidades.' },
+  { icon: Receipt, title: 'Inventario y ventas', text: 'Lectura de carrito, rotación por variedad, formatos vendidos y resumen diario para administración.' },
+  { icon: Truck, title: 'Seguimiento de envíos', text: 'Estado del despacho, número de compra, enlace de tracking y aviso automático por WhatsApp o correo.' },
+  { icon: ShieldCheck, title: 'Verificación de pagos', text: 'Chequeo de pago por Transbank, TUU o transferencia antes de liberar preparación y despacho.' },
+];
+
+const aiAgentMetrics = [
+  { label: 'Productos monitoreados', value: products.length.toString() },
+  { label: 'Métodos de pago', value: '3 activos' },
+  { label: 'Canales de aviso', value: 'WhatsApp + email' },
 ];
 
 const formatCurrency = (value: number) =>
@@ -465,21 +479,47 @@ export default function App() {
 
       <section id="ia-stock" className="section intelligence-section">
         <div className="ai-card">
-          <div>
-            <p className="eyebrow">Marcha blanca</p>
-            <h2>Agente IA de ventas y stock</h2>
+          <div className="ai-overview">
+            <p className="eyebrow">Agente operativo IA</p>
+            <h2>Control de stock, ventas, pagos y envíos</h2>
             <p>
-              El asistente queda anclado junto a WhatsApp para orientar compras, revisar disponibilidad de productos y
-              prevenir quiebres de stock durante la sincronización viva del inventario.
+              El agente IA centraliza la operación Lambert Coffee: monitorea inventario en tiempo real, resume ventas,
+              valida pagos por Transbank, TUU o transferencia y prepara alertas de seguimiento de envío para cada pedido.
             </p>
+            <div className="ai-metrics" aria-label="Indicadores del agente IA">
+              {aiAgentMetrics.map((metric) => (
+                <div key={metric.label}>
+                  <strong>{metric.value}</strong>
+                  <span>{metric.label}</span>
+                </div>
+              ))}
+            </div>
+            <a className="icon-action" href={`https://wa.me/${whatsappNumber}?text=Hola Lambert Coffee, necesito asistencia del agente IA para stock, ventas, pagos o envíos.`} target="_blank" rel="noreferrer">
+              <Bot size={18} /> Activar agente por WhatsApp
+            </a>
           </div>
-          <div className="stock-board">
-            {products.map((product) => (
-              <div key={product.id}>
-                <span>{product.name}</span>
-                <strong>{product.stock} disponibles</strong>
-              </div>
-            ))}
+
+          <div className="ai-operations">
+            <div className="ai-modules">
+              {aiAgentModules.map((module) => {
+                const Icon = module.icon;
+                return (
+                  <article key={module.title} className="ai-module-card">
+                    <Icon size={22} />
+                    <h3>{module.title}</h3>
+                    <p>{module.text}</p>
+                  </article>
+                );
+              })}
+            </div>
+            <div className="stock-board" aria-label="Inventario monitoreado por el agente IA">
+              {products.map((product) => (
+                <div key={product.id}>
+                  <span>{product.name}</span>
+                  <strong>{product.stock} disponibles</strong>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -701,7 +741,10 @@ export default function App() {
         </a>
       </section>
 
-      <div className="floating-actions" aria-label="WhatsApp y métodos de pago">
+      <div className="floating-actions" aria-label="Agente IA, WhatsApp y métodos de pago">
+        <a href="#ia-stock" className="float-btn ai-float">
+          <Bot size={20} /> Agente IA
+        </a>
         <a href={`https://wa.me/${whatsappNumber}`} className="float-btn whatsapp-float" target="_blank" rel="noreferrer">
           <MessageCircle size={20} /> WhatsApp
         </a>

@@ -594,14 +594,82 @@ h3 {
 }
 
 .ai-card {
-  align-items: center;
+  align-items: start;
   border-radius: 24px;
   display: grid;
   gap: 28px;
-  grid-template-columns: 1fr 0.85fr;
+  grid-template-columns: 0.82fr 1.18fr;
   margin: 0 auto;
   max-width: 1220px;
   padding: clamp(24px, 4vw, 44px);
+}
+
+.ai-overview {
+  display: grid;
+  gap: 18px;
+}
+
+.ai-metrics,
+.ai-modules {
+  display: grid;
+  gap: 12px;
+}
+
+.ai-metrics {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ai-metrics div,
+.ai-module-card {
+  background: var(--panel-soft);
+  border: 1px solid rgba(240, 195, 90, 0.14);
+  border-radius: 14px;
+}
+
+.ai-metrics div {
+  padding: 14px;
+}
+
+.ai-metrics strong,
+.ai-metrics span {
+  display: block;
+}
+
+.ai-metrics strong {
+  color: var(--gold);
+  font-size: 1.18rem;
+}
+
+.ai-metrics span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+.ai-operations {
+  display: grid;
+  gap: 16px;
+}
+
+.ai-modules {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ai-module-card {
+  padding: 18px;
+}
+
+.ai-module-card svg {
+  color: var(--gold);
+}
+
+.ai-module-card h3 {
+  font-size: 1.35rem;
+  margin: 12px 0 8px;
+}
+
+.ai-module-card p {
+  margin: 0;
 }
 
 .stock-board {
@@ -867,7 +935,7 @@ textarea:focus {
   box-shadow: var(--shadow);
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(5, auto);
   left: 50%;
   padding: 10px;
   position: fixed;
@@ -882,6 +950,12 @@ textarea:focus {
   min-height: 48px;
   padding: 0 18px;
   white-space: nowrap;
+}
+
+.ai-float {
+  background: rgba(5, 5, 5, 0.88);
+  border: 1px solid var(--line);
+  color: var(--gold);
 }
 
 .whatsapp-float {
@@ -969,6 +1043,8 @@ footer {
   .product-grid,
   .workflow-grid,
   .ai-card,
+  .ai-metrics,
+  .ai-modules,
   .checkout-layout,
   .form-grid,
   .invoice-grid,
