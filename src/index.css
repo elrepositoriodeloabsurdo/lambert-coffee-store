@@ -859,32 +859,45 @@ textarea:focus {
 }
 
 .floating-actions {
+  background: rgba(5, 5, 5, 0.82);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  border-radius: 999px;
   bottom: 22px;
+  box-shadow: var(--shadow);
   display: grid;
   gap: 10px;
+  grid-template-columns: repeat(4, auto);
+  left: 50%;
+  padding: 10px;
   position: fixed;
-  right: 22px;
+  transform: translateX(-50%);
   z-index: 30;
 }
 
 .float-btn {
   border-radius: 999px;
-  box-shadow: var(--shadow);
   font-weight: 900;
   justify-content: center;
   min-height: 48px;
   padding: 0 18px;
-}
-
-.ai-float {
-  background: rgba(5, 5, 5, 0.88);
-  border: 1px solid var(--line);
-  color: var(--gold);
+  white-space: nowrap;
 }
 
 .whatsapp-float {
   background: #25d366;
   color: #061207;
+}
+
+.payment-float {
+  background: linear-gradient(135deg, var(--gold), #ffd978 48%, var(--gold-deep));
+  color: #130d05;
+}
+
+.transfer-float {
+  background: rgba(5, 5, 5, 0.88);
+  border: 1px solid var(--line);
+  color: var(--gold);
 }
 
 footer {
@@ -978,11 +991,15 @@ footer {
   }
 
   .floating-actions {
+    border-radius: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     left: 16px;
     right: 16px;
+    transform: none;
   }
 
   .float-btn {
+    padding: 0 12px;
     width: 100%;
   }
 }

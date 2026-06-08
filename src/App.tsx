@@ -1,7 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import {
   Banknote,
-  Bot,
   ChevronLeft,
   ChevronRight,
   Coffee,
@@ -702,12 +701,18 @@ export default function App() {
         </a>
       </section>
 
-      <div className="floating-actions" aria-label="Accesos rápidos">
-        <a href="#ia-stock" className="float-btn ai-float">
-          <Bot size={20} /> IA Stock
-        </a>
+      <div className="floating-actions" aria-label="WhatsApp y métodos de pago">
         <a href={`https://wa.me/${whatsappNumber}`} className="float-btn whatsapp-float" target="_blank" rel="noreferrer">
           <MessageCircle size={20} /> WhatsApp
+        </a>
+        <a href="#checkout" className="float-btn payment-float" onClick={() => setPaymentMethod('transbank')}>
+          <CreditCard size={20} /> Transbank
+        </a>
+        <a href="#checkout" className="float-btn payment-float" onClick={() => setPaymentMethod('tuu')}>
+          <CreditCard size={20} /> TUU
+        </a>
+        <a href="#checkout" className="float-btn transfer-float" onClick={() => setPaymentMethod('transfer')}>
+          <Banknote size={20} /> Transferencia
         </a>
       </div>
 
