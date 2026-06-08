@@ -359,7 +359,11 @@ export default function App() {
       </nav>
 
       <section id="inicio" className="hero">
-        <video className="hero-video" src="/assets/lambert-hero.mp4" autoPlay muted loop playsInline />
+        <div className="hero-video hero-brand-backdrop" aria-hidden="true">
+          <span>LAMBERT COFFEE</span>
+          <span>LAMBERT COFFEE</span>
+          <span>LAMBERT COFFEE</span>
+        </div>
         <div className="hero-overlay" />
         <div className="hero-logo-card">
           <img src="/assets/logo-lambert.jpg" alt="Logo Lambert Coffee" />
