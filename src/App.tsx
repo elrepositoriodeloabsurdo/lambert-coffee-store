@@ -58,68 +58,68 @@ const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
 
 const products: Product[] = [
   {
-    id: 'colombia-huila',
-    name: 'Colombia Huila',
-    origin: 'Huila, Colombia',
-    label: 'Etiqueta dorada',
-    labelClass: 'gold-label',
-    profile: 'Caturra, chocolate y naranja',
-    description: 'Café de especialidad con acidez elegante, cuerpo sedoso y final dulce para filtrados premium.',
-    roast: 'Medio claro',
-    image: '/assets/colombia-huila-amarillo.png',
-    stock: 18,
-    prices: coffeePrices,
-  },
-  {
-    id: 'blend-latinoamericano',
-    name: 'Blend Latinoamericano',
-    origin: 'Latinoamérica',
-    label: 'Etiqueta dorada',
-    labelClass: 'gold-label',
-    profile: 'Cacao, miel y caramelo',
-    description: 'Mezcla balanceada para uso diario con crema estable, aroma tostado y sabor persistente.',
-    roast: 'Medio',
-    image: '/assets/blend-latinoamericano-dorado.jpg',
-    stock: 24,
-    prices: coffeePrices,
-  },
-  {
-    id: 'arabica-100',
-    name: 'Arábico 100%',
+    id: 'arabica-especialidad',
+    name: 'Café de Especialidad Arábica',
     origin: 'Catuai Amarillo',
-    label: 'Etiqueta blanca',
-    labelClass: 'white-label',
+    label: 'Empaque negro',
+    labelClass: 'dark-pack',
     profile: 'Chocolate, miel y caramelo',
-    description: 'Perfil limpio y aromático para espresso moderno, prensa francesa y molienda fresca en casa.',
+    description: 'Café arábica de especialidad con dulzor balanceado, notas de chocolate y final acaramelado.',
     roast: 'Medio',
     image: '/assets/arabica-crema.jpg',
     stock: 15,
     prices: coffeePrices,
   },
   {
-    id: 'blend-brasileno',
-    name: 'Blend Brasileño',
-    origin: 'Brasil',
-    label: 'Etiqueta negra',
-    labelClass: 'black-label',
+    id: 'colombia-huila',
+    name: 'Café de Especialidad Colombia Huila',
+    origin: 'Huila, Colombia',
+    label: 'Empaque dorado',
+    labelClass: 'gold-label',
+    profile: 'Chocolate y naranja',
+    description: 'Café de origen colombiano con acidez elegante, cuerpo sedoso y final dulce para filtrados premium.',
+    roast: 'Medio claro',
+    image: '/assets/colombia-huila-amarillo.png',
+    stock: 18,
+    prices: coffeePrices,
+  },
+  {
+    id: 'robusta-especialidad',
+    name: 'Café de Especialidad Robusta',
+    origin: 'Fazenda Venturim',
+    label: 'Empaque blanco',
+    labelClass: 'white-label',
     profile: 'Chocolate, avellana y frutos secos',
-    description: 'Café intenso, cremoso y de baja acidez para quienes buscan una taza con carácter.',
+    description: 'Robusta de especialidad con mayor cuerpo, potencia y rendimiento para espresso clásico.',
+    roast: 'Alto',
+    image: '/assets/robusta-blanco.jpg',
+    stock: 12,
+    prices: coffeePrices,
+  },
+  {
+    id: 'blend-especialidad',
+    name: 'Café de Especialidad Blend',
+    origin: 'Arábica 70% / Robusta 30%',
+    label: 'Empaque dorado',
+    labelClass: 'gold-label',
+    profile: 'Chocolate, miel, avellana y caramelo',
+    description: 'Blend intenso y cremoso con equilibrio entre dulzor arábica y cuerpo robusta.',
     roast: 'Medio alto',
     image: '/assets/blend-dorado.jpg',
     stock: 20,
     prices: coffeePrices,
   },
   {
-    id: 'robusta',
-    name: 'Robusta',
-    origin: 'Fazenda Venturim',
-    label: 'Empaque negro',
-    labelClass: 'dark-pack',
-    profile: 'Chocolate, avellana y frutos secos',
-    description: 'Mayor cuerpo, potencia y rendimiento para mezclas, espresso clásico y cafeteras automáticas.',
-    roast: 'Alto',
-    image: '/assets/robusta-blanco.jpg',
-    stock: 12,
+    id: 'blend-latinoamericano',
+    name: 'Café de Especialidad Blend Latinoamericano',
+    origin: 'Latinoamérica',
+    label: 'Empaque dorado',
+    labelClass: 'gold-label',
+    profile: 'Cacao, miel y caramelo',
+    description: 'Mezcla latinoamericana balanceada para uso diario con crema estable y sabor persistente.',
+    roast: 'Medio',
+    image: '/assets/blend-latinoamericano-dorado.jpg',
+    stock: 24,
     prices: coffeePrices,
   },
 ];
@@ -355,18 +355,15 @@ export default function App() {
           <img src="/assets/logo-lambert.jpg" alt="Lambert Coffee" />
           <span>Lambert Coffee</span>
         </a>
-        <div className="nav-links">
-          <a href="#catalogo">Catálogo</a>
-          <a href="#ia-stock">IA y stock</a>
-          <a href="#checkout">Checkout</a>
-        </div>
         <div className="topbar-actions">
-          <a className="icon-btn" href="#checkout" aria-label="Carrito de compra">
-            <ShoppingBag size={20} />
-            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-          </a>
-          <a className="icon-btn" href="#cuenta" aria-label="Cuenta de usuario">
+          <a className="icon-btn header-access" href="#cuenta" aria-label="Acceso de usuario">
             <User size={20} />
+            <span>Acceso</span>
+          </a>
+          <a className="icon-btn header-cart" href="#checkout" aria-label="Carrito de compra">
+            <ShoppingBag size={20} />
+            <span>Carro</span>
+            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </a>
         </div>
       </nav>
@@ -378,10 +375,6 @@ export default function App() {
           <span>LAMBERT COFFEE</span>
         </div>
         <div className="hero-overlay" />
-        <div className="hero-logo-card">
-          <img src="/assets/logo-lambert.jpg" alt="Logo Lambert Coffee" />
-          <span>Especialidad · Chile</span>
-        </div>
         <div className="hero-content">
           <p className="eyebrow">Café de especialidad premium</p>
           <h1>Elegancia oscura, sabor dorado.</h1>
@@ -406,7 +399,7 @@ export default function App() {
         <div className="gallery-head">
           <p className="eyebrow">Carrusel 01</p>
           <h2>Café de Especialidad</h2>
-          <p>Cinco variedades con etiquetas visuales por presentación, origen y formato.</p>
+          <p>Cinco cafés integrados al carrusel: Arábica, Colombia Huila, Robusta, Blend y Blend Latinoamericano.</p>
         </div>
         {renderCarousel(
           products.map((product) => ({
