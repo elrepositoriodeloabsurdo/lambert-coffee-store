@@ -18,6 +18,24 @@ Proyecto web React + Vite listo para catalogo, carrito y checkout inicial.
 3. Agrega `VITE_TUU_CHECKOUT_URL` si tienes link de checkout Tuu.
 4. Agrega `VITE_TRANSBANK_CHECKOUT_URL` si tienes un link o endpoint propio para Transbank.
 
+
+## Despliegue fullstack local
+
+Para ver el diseño en un servidor local que también expone APIs de prueba de inventario y órdenes:
+
+```bash
+npm install
+npm run deploy:local
+```
+
+Abre `http://localhost:3000` en el navegador. El servidor Express entrega el build de Vite desde `dist/` y deja disponibles estos endpoints locales:
+
+- `GET /api/health`: estado del servidor local.
+- `GET /api/inventory`: inventario de marcha blanca para el asistente IA/stock.
+- `POST /api/orders`: creación simulada de pedido con número de compra y tracking local.
+
+Si solo quieres correr el frontend en modo desarrollo con recarga rápida, usa `npm run dev`.
+
 ## Desarrollo
 
 ```bash

@@ -83,6 +83,24 @@ npm run build
 
 ---
 
+
+## Local Fullstack Deploy
+
+Use this option when you want to review the final design through a production Vite build served by a local Express backend.
+
+```bash
+npm install
+npm run deploy:local
+```
+
+Open `http://localhost:3000`. The command builds `dist/` and starts `server.ts`, which serves the React app and exposes local test APIs:
+
+- `GET /api/health`
+- `GET /api/inventory`
+- `POST /api/orders`
+
+To change the port, run for example `PORT=4000 npm run deploy:local` and open `http://localhost:4000`.
+
 ## Local Development
 
 ```bash
