@@ -53,6 +53,8 @@ type PaymentMethod = 'tuu' | 'transbank' | 'transfer';
 const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '56912345678';
 const tuuCheckoutUrl = import.meta.env.VITE_TUU_CHECKOUT_URL || '';
 const transbankCheckoutUrl = import.meta.env.VITE_TRANSBANK_CHECKOUT_URL || '';
+const defaultHeroVideoUrl = '/assets/lambert-hero.mp4';
+const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL?.trim() || defaultHeroVideoUrl;
 
 const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
 
@@ -359,7 +361,10 @@ export default function App() {
       </nav>
 
       <section id="inicio" className="hero">
-        <video className="hero-video" src="/assets/lambert-hero.mp4" autoPlay muted loop playsInline />
+        <video className="hero-video" autoPlay muted loop playsInline>
+          <source src={heroVideoUrl} type="video/mp4" />
+          Tu navegador no puede reproducir el video de portada.
+        </video>
         <div className="hero-overlay" />
         <div className="hero-logo-card">
           <img src="/assets/logo-lambert.jpg" alt="Logo Lambert Coffee" />
