@@ -17,6 +17,11 @@ Proyecto web React + Vite listo para catalogo, carrito y checkout inicial.
 2. Cambia `VITE_HERO_VIDEO_URL` para reemplazar el video del hero. Puedes usar una URL publica (`https://...`) o subir un `.mp4` a `public/assets/` y referenciarlo como `/assets/nombre-del-video.mp4`. En Vercel, agregalo en **Settings > Environment Variables** y redeploya el proyecto para que el cambio quede publicado.
 3. Agrega `VITE_TUU_CHECKOUT_URL` si tienes link de checkout Tuu.
 4. Agrega `VITE_TRANSBANK_CHECKOUT_URL` si tienes un link o endpoint propio para Transbank.
+1. Copia `.env.example` como `.env.local`.
+2. Cambia `VITE_WHATSAPP_NUMBER` por el numero real, sin `+`.
+3. Cambia `VITE_HERO_VIDEO_URL` para reemplazar el video del hero. Puedes usar una URL publica (`https://...`) o subir un `.mp4` a `public/assets/` y referenciarlo como `/assets/nombre-del-video.mp4`. En Vercel, agregalo en **Settings > Environment Variables** y redeploya el proyecto para que el cambio quede publicado.
+4. Agrega `VITE_TUU_CHECKOUT_URL` si tienes link de checkout Tuu.
+5. Agrega `VITE_TRANSBANK_CHECKOUT_URL` si tienes un link o endpoint propio para Transbank.
 
 
 ## Despliegue fullstack local
