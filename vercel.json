@@ -1,10 +1,5 @@
 {
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "outputDirectory": "dist",
-  "env": {
-    "VITE_WHATSAPP_NUMBER": "@vite_whatsapp_number",
-    "VITE_TUU_CHECKOUT_URL": "@vite_tuu_checkout_url",
-    "VITE_TRANSBANK_CHECKOUT_URL": "@vite_transbank_checkout_url"
-  }
+  "outputDirectory": "dist"
 }

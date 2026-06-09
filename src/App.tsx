@@ -50,7 +50,8 @@ type CartItem = {
 
 type PaymentMethod = 'tuu' | 'transbank' | 'transfer';
 
-const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '56912345678';
+const whatsappContactNumber = '+56912345678';
+const whatsappNumber = whatsappContactNumber.replace('+', '');
 const tuuCheckoutUrl = import.meta.env.VITE_TUU_CHECKOUT_URL || '';
 const transbankCheckoutUrl = import.meta.env.VITE_TRANSBANK_CHECKOUT_URL || '';
 const defaultHeroVideoUrl = '/assets/lambert-hero.mp4';
