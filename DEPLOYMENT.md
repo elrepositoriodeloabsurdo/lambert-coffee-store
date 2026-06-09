@@ -66,7 +66,6 @@ npm run build
 **In Vercel Dashboard:**
 1. Go to Project Settings → Environment Variables
 2. Add each variable:
-   - `VITE_WHATSAPP_NUMBER` = Your WhatsApp number (without +)
    - `VITE_TUU_CHECKOUT_URL` = Your Tuu checkout link (optional)
    - `VITE_TRANSBANK_CHECKOUT_URL` = Your Transbank link (optional)
 
@@ -74,7 +73,6 @@ npm run build
 
 ## Pre-Deployment Checklist
 
-- [ ] Update `VITE_WHATSAPP_NUMBER` in `.env.local` with real number
 - [ ] Test locally: `npm run dev`
 - [ ] Check build: `npm run build`
 - [ ] Preview build: `npm run preview`
@@ -82,6 +80,24 @@ npm run build
 - [ ] Ensure `.gitignore` includes `.env.local`
 
 ---
+
+
+## Local Fullstack Deploy
+
+Use this option when you want to review the final design through a production Vite build served by a local Express backend.
+
+```bash
+npm install
+npm run deploy:local
+```
+
+Open `http://localhost:3000`. The command builds `dist/` and starts `server.ts`, which serves the React app and exposes local test APIs:
+
+- `GET /api/health`
+- `GET /api/inventory`
+- `POST /api/orders`
+
+To change the port, run for example `PORT=4000 npm run deploy:local` and open `http://localhost:4000`.
 
 ## Local Development
 
