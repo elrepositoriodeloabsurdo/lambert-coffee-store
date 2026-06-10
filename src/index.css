@@ -92,10 +92,35 @@ textarea {
   text-transform: uppercase;
 }
 
+.topbar-links,
 .topbar-actions {
   align-items: center;
   display: flex;
-  gap: 12px;
+}
+
+.topbar-links {
+  gap: clamp(16px, 3vw, 28px);
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.topbar-links a {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: 180ms ease;
+  white-space: nowrap;
+}
+
+.topbar-links a:hover {
+  color: var(--gold);
+}
+
+.topbar-actions {
+  gap: 16px;
 }
 
 .eyebrow {
@@ -110,15 +135,15 @@ textarea {
   align-items: center;
   background: rgba(240, 195, 90, 0.1);
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 14px;
   color: var(--gold);
   display: inline-flex;
-  gap: 8px;
-  min-height: 44px;
+  height: 44px;
   justify-content: center;
-  padding: 0 14px;
+  padding: 0;
   position: relative;
   transition: 180ms ease;
+  width: 44px;
 }
 
 .icon-btn span:not(.cart-badge) {
@@ -170,7 +195,10 @@ textarea {
 }
 
 .hero-video {
+  border: 0;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
   width: 100%;
 }
 
@@ -899,54 +927,6 @@ textarea:focus {
   max-width: 760px;
 }
 
-.floating-actions {
-  background: rgba(5, 5, 5, 0.82);
-  backdrop-filter: blur(18px);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  bottom: 22px;
-  box-shadow: var(--shadow);
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(5, auto);
-  left: 50%;
-  padding: 10px;
-  position: fixed;
-  transform: translateX(-50%);
-  z-index: 30;
-}
-
-.float-btn {
-  border-radius: 999px;
-  font-weight: 900;
-  justify-content: center;
-  min-height: 48px;
-  padding: 0 18px;
-  white-space: nowrap;
-}
-
-.ai-float {
-  background: rgba(5, 5, 5, 0.88);
-  border: 1px solid var(--line);
-  color: var(--gold);
-}
-
-.whatsapp-float {
-  background: #25d366;
-  color: #061207;
-}
-
-.payment-float {
-  background: linear-gradient(135deg, var(--gold), #ffd978 48%, var(--gold-deep));
-  color: #130d05;
-}
-
-.transfer-float {
-  background: rgba(5, 5, 5, 0.88);
-  border: 1px solid var(--line);
-  color: var(--gold);
-}
-
 footer {
   border-top: 1px solid var(--line);
   padding: 28px clamp(18px, 4vw, 42px) 96px;
@@ -988,16 +968,17 @@ footer {
     font-size: 0.86rem;
   }
 
+  .topbar-links {
+    display: none;
+  }
+
   .topbar-actions {
     gap: 8px;
   }
 
   .icon-btn {
-    padding: 0 11px;
-  }
-
-  .icon-btn span:not(.cart-badge) {
-    font-size: 0.68rem;
+    height: 40px;
+    width: 40px;
   }
 
   .hero {
