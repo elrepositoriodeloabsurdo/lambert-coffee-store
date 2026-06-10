@@ -18,6 +18,8 @@ Proyecto web React + Vite listo para catalogo, carrito y checkout inicial.
 3. Agrega `VITE_TUU_CHECKOUT_URL` si tienes link de checkout Tuu.
 4. Agrega `VITE_TRANSBANK_CHECKOUT_URL` si tienes un link o endpoint propio para Transbank.
 5. Agrega `VITE_HERO_VIDEO_URL` con una URL publica del video del hero. Puede ser YouTube (`watch`, `shorts` o `youtu.be`) o un archivo mp4/webm publico.
+5. `VITE_HERO_VIDEO_URL` acepta un enlace publico del video del hero; por defecto usa el Short de YouTube `https://youtube.com/shorts/crgnHwaZSkc?feature=share` sin versionar archivos binarios en git.
+5. Agrega `VITE_HERO_VIDEO_URL` con una URL publica del video del hero si quieres reemplazar el fondo animado sin versionar archivos binarios en git.
 
 
 ## Despliegue fullstack local
