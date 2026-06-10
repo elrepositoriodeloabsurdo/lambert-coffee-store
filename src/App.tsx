@@ -98,6 +98,7 @@ const getHeroVideoConfig = (url: string): HeroVideoConfig | null => {
 const heroVideo = getHeroVideoConfig(heroVideoUrl);
 
 const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
+const repoUploadedImage = (filename: string) => `/assets/${filename}`;
 
 const products: Product[] = [
   {
@@ -109,7 +110,7 @@ const products: Product[] = [
     profile: 'Chocolate, miel y caramelo',
     description: 'Café arábica de especialidad con dulzor balanceado, notas de chocolate y final acaramelado.',
     roast: 'Medio',
-    image: '/assets/arabica-crema.jpg',
+    image: repoUploadedImage('watermarked_img_11321665646606839912.jpg'),
     stock: 15,
     prices: coffeePrices,
   },
@@ -122,7 +123,7 @@ const products: Product[] = [
     profile: 'Chocolate y naranja',
     description: 'Café de origen colombiano con acidez elegante, cuerpo sedoso y final dulce para filtrados premium.',
     roast: 'Medio claro',
-    image: '/assets/colombia-huila-amarillo.png',
+    image: repoUploadedImage('watermarked_img_11539890353660775228.jpg'),
     stock: 18,
     prices: coffeePrices,
   },
@@ -135,7 +136,7 @@ const products: Product[] = [
     profile: 'Chocolate, avellana y frutos secos',
     description: 'Robusta de especialidad con mayor cuerpo, potencia y rendimiento para espresso clásico.',
     roast: 'Alto',
-    image: '/assets/robusta-blanco.jpg',
+    image: repoUploadedImage('watermarked_img_3758094186528968053.jpg'),
     stock: 12,
     prices: coffeePrices,
   },
@@ -148,7 +149,7 @@ const products: Product[] = [
     profile: 'Chocolate, miel, avellana y caramelo',
     description: 'Blend intenso y cremoso con equilibrio entre dulzor arábica y cuerpo robusta.',
     roast: 'Medio alto',
-    image: '/assets/blend-dorado.jpg',
+    image: repoUploadedImage('watermarked_img_6231043378607359984.jpg'),
     stock: 20,
     prices: coffeePrices,
   },
@@ -161,7 +162,7 @@ const products: Product[] = [
     profile: 'Cacao, miel y caramelo',
     description: 'Mezcla latinoamericana balanceada para uso diario con crema estable y sabor persistente.',
     roast: 'Medio',
-    image: '/assets/blend-latinoamericano-dorado.jpg',
+    image: repoUploadedImage('watermarked_img_8512971140518397507.jpg'),
     stock: 24,
     prices: coffeePrices,
   },
