@@ -53,7 +53,49 @@ type PaymentMethod = 'tuu' | 'transbank' | 'transfer';
 const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '56912345678';
 const tuuCheckoutUrl = import.meta.env.VITE_TUU_CHECKOUT_URL || '';
 const transbankCheckoutUrl = import.meta.env.VITE_TRANSBANK_CHECKOUT_URL || '';
-const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL || '';
+const defaultHeroVideoUrl = 'https://youtube.com/shorts/crgnHwaZSkc?feature=share';
+const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL || defaultHeroVideoUrl;
+
+type HeroVideoConfig =
+  | { type: 'youtube'; src: string }
+  | { type: 'video'; src: string };
+
+const getHeroVideoConfig = (url: string): HeroVideoConfig | null => {
+  if (!url) return null;
+
+  try {
+    const parsedUrl = new URL(url);
+    const isYouTubeHost = ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be'].includes(parsedUrl.hostname);
+
+    if (isYouTubeHost) {
+      const videoId = parsedUrl.hostname === 'youtu.be'
+        ? parsedUrl.pathname.split('/').filter(Boolean)[0]
+        : parsedUrl.pathname.startsWith('/shorts/')
+          ? parsedUrl.pathname.split('/').filter(Boolean)[1]
+          : parsedUrl.searchParams.get('v');
+
+      if (videoId) {
+        const embedUrl = new URL(`https://www.youtube.com/embed/${videoId}`);
+        embedUrl.searchParams.set('autoplay', '1');
+        embedUrl.searchParams.set('mute', '1');
+        embedUrl.searchParams.set('loop', '1');
+        embedUrl.searchParams.set('playlist', videoId);
+        embedUrl.searchParams.set('playsinline', '1');
+        embedUrl.searchParams.set('controls', '0');
+        embedUrl.searchParams.set('modestbranding', '1');
+        embedUrl.searchParams.set('rel', '0');
+
+        return { type: 'youtube', src: embedUrl.toString() };
+      }
+    }
+  } catch {
+    return { type: 'video', src: url };
+  }
+
+  return { type: 'video', src: url };
+};
+
+const heroVideo = getHeroVideoConfig(heroVideoUrl);
 
 const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
 
@@ -356,22 +398,34 @@ export default function App() {
           <img src="/assets/logo-lambert.jpg" alt="Lambert Coffee" />
           <span>Lambert Coffee</span>
         </a>
+        <div className="topbar-links" aria-label="Navegación principal">
+          <a href="#catalogo">Catálogo</a>
+          <a href="#ia-stock">IA y Stock</a>
+          <a href="#checkout">Checkout</a>
+        </div>
         <div className="topbar-actions">
-          <a className="icon-btn header-access" href="#cuenta" aria-label="Acceso de usuario">
-            <User size={20} />
-            <span>Acceso</span>
-          </a>
           <a className="icon-btn header-cart" href="#checkout" aria-label="Carrito de compra">
             <ShoppingBag size={20} />
-            <span>Carro</span>
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+          </a>
+          <a className="icon-btn header-access" href="#cuenta" aria-label="Acceso de usuario">
+            <User size={20} />
           </a>
         </div>
       </nav>
 
       <section id="inicio" className="hero">
-        {heroVideoUrl ? (
-          <video className="hero-video" src={heroVideoUrl} autoPlay muted loop playsInline aria-hidden="true" />
+        {heroVideo?.type === 'youtube' ? (
+          <iframe
+            className="hero-video"
+            src={heroVideo.src}
+            title="Lambert Coffee hero video"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            aria-hidden="true"
+          />
+        ) : heroVideo?.type === 'video' ? (
+          <video className="hero-video" src={heroVideo.src} autoPlay muted loop playsInline aria-hidden="true" />
         ) : (
           <div className="hero-video hero-brand-backdrop" aria-hidden="true">
             <span>LAMBERT COFFEE</span>
@@ -739,23 +793,6 @@ export default function App() {
         </a>
       </section>
 
-      <div className="floating-actions" aria-label="Agente IA, WhatsApp y métodos de pago">
-        <a href="#ia-stock" className="float-btn ai-float">
-          <Bot size={20} /> Agente IA
-        </a>
-        <a href={`https://wa.me/${whatsappNumber}`} className="float-btn whatsapp-float" target="_blank" rel="noreferrer">
-          <MessageCircle size={20} /> WhatsApp
-        </a>
-        <a href="#checkout" className="float-btn payment-float" onClick={() => setPaymentMethod('transbank')}>
-          <CreditCard size={20} /> Transbank
-        </a>
-        <a href="#checkout" className="float-btn payment-float" onClick={() => setPaymentMethod('tuu')}>
-          <CreditCard size={20} /> TUU
-        </a>
-        <a href="#checkout" className="float-btn transfer-float" onClick={() => setPaymentMethod('transfer')}>
-          <Banknote size={20} /> Transferencia
-        </a>
-      </div>
 
       <footer>
         <div className="footer-grid">
