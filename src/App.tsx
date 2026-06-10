@@ -53,6 +53,7 @@ type PaymentMethod = 'tuu' | 'transbank' | 'transfer';
 const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '56912345678';
 const tuuCheckoutUrl = import.meta.env.VITE_TUU_CHECKOUT_URL || '';
 const transbankCheckoutUrl = import.meta.env.VITE_TRANSBANK_CHECKOUT_URL || '';
+const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL || '';
 
 const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
 
@@ -369,11 +370,15 @@ export default function App() {
       </nav>
 
       <section id="inicio" className="hero">
-        <div className="hero-video hero-brand-backdrop" aria-hidden="true">
-          <span>LAMBERT COFFEE</span>
-          <span>LAMBERT COFFEE</span>
-          <span>LAMBERT COFFEE</span>
-        </div>
+        {heroVideoUrl ? (
+          <video className="hero-video" src={heroVideoUrl} autoPlay muted loop playsInline aria-hidden="true" />
+        ) : (
+          <div className="hero-video hero-brand-backdrop" aria-hidden="true">
+            <span>LAMBERT COFFEE</span>
+            <span>LAMBERT COFFEE</span>
+            <span>LAMBERT COFFEE</span>
+          </div>
+        )}
         <div className="hero-overlay" />
         <div className="hero-content">
           <p className="eyebrow">Café de especialidad premium</p>
