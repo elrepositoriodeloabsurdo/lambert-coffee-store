@@ -68,10 +68,11 @@ const getHeroVideoConfig = (url: string): HeroVideoConfig | null => {
     const isYouTubeHost = ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be'].includes(parsedUrl.hostname);
 
     if (isYouTubeHost) {
+      const pathParts = parsedUrl.pathname.split('/').filter(Boolean);
       const videoId = parsedUrl.hostname === 'youtu.be'
-        ? parsedUrl.pathname.split('/').filter(Boolean)[0]
-        : parsedUrl.pathname.startsWith('/shorts/')
-          ? parsedUrl.pathname.split('/').filter(Boolean)[1]
+        ? pathParts[0]
+        : pathParts[0] === 'shorts' || pathParts[0] === 'embed'
+          ? pathParts[1]
           : parsedUrl.searchParams.get('v');
 
       if (videoId) {
@@ -96,28 +97,6 @@ const getHeroVideoConfig = (url: string): HeroVideoConfig | null => {
 };
 
 const heroVideo = getHeroVideoConfig(heroVideoUrl);
-
-const getYoutubeEmbedUrl = (url: string) => {
-  const youtubeMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
-
-  if (!youtubeMatch) {
-    return '';
-  }
-
-  const videoId = youtubeMatch[1];
-  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`;
-};
-
-const getYoutubeEmbedUrl = (url: string) => {
-  const youtubeMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
-
-  if (!youtubeMatch) {
-    return '';
-  }
-
-  const videoId = youtubeMatch[1];
-  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`;
-};
 
 const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
 
@@ -381,8 +360,6 @@ export default function App() {
     .filter(Boolean)
     .join('%0A');
 
-  const youtubeEmbedUrl = getYoutubeEmbedUrl(heroVideoUrl);
-
   const checkoutHref =
     paymentMethod === 'tuu'
       ? tuuCheckoutUrl || `https://wa.me/${whatsappNumber}?text=${whatsappMessage}%0A%0AMétodo: TUU`
@@ -439,24 +416,14 @@ export default function App() {
       </nav>
 
       <section id="inicio" className="hero">
-        {youtubeEmbedUrl ? (
-          <iframe
-            className="hero-video hero-youtube-video"
-            src={youtubeEmbedUrl}
-            title="Video de portada Lambert Coffee"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            referrerPolicy="strict-origin-when-cross-origin"
-            aria-hidden="true"
-          />
-        ) : heroVideoUrl ? (
-          <video className="hero-video" src={heroVideoUrl} autoPlay muted loop playsInline aria-hidden="true" />
         {heroVideo?.type === 'youtube' ? (
           <iframe
-            className="hero-video"
+            className="hero-video hero-youtube-video"
             src={heroVideo.src}
-            title="Lambert Coffee hero video"
+            title="Video de portada Lambert Coffee"
             allow="autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
             aria-hidden="true"
           />
         ) : heroVideo?.type === 'video' ? (
