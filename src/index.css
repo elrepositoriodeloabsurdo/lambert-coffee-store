@@ -77,6 +77,10 @@ textarea {
   gap: 10px;
 }
 
+.brand {
+  flex: 1;
+}
+
 .brand img {
   border: 1px solid var(--line);
   border-radius: 50%;
@@ -92,24 +96,10 @@ textarea {
   text-transform: uppercase;
 }
 
-.nav-links,
 .topbar-actions {
   align-items: center;
   display: flex;
   gap: 16px;
-}
-
-.nav-links a,
-.eyebrow {
-  color: var(--muted);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.nav-links a:hover {
-  color: var(--gold);
 }
 
 .icon-btn {
@@ -124,6 +114,10 @@ textarea {
   position: relative;
   transition: 180ms ease;
   width: 44px;
+}
+
+.icon-btn.round-icon {
+  border-radius: 50%;
 }
 
 .icon-btn:hover,
@@ -886,10 +880,6 @@ footer {
     height: auto;
     padding-bottom: 12px;
     padding-top: 12px;
-  }
-
-  .nav-links {
-    display: none;
   }
 
   .brand span {

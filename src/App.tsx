@@ -345,17 +345,12 @@ export default function App() {
           <img src="/assets/logo-lambert.jpg" alt="Lambert Coffee" />
           <span>Lambert Coffee</span>
         </a>
-        <div className="nav-links">
-          <a href="#catalogo">Catálogo</a>
-          <a href="#ia-stock">IA y stock</a>
-          <a href="#checkout">Checkout</a>
-        </div>
         <div className="topbar-actions">
           <a className="icon-btn" href="#checkout" aria-label="Carrito de compra">
             <ShoppingBag size={20} />
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </a>
-          <a className="icon-btn" href="#cuenta" aria-label="Cuenta de usuario">
+          <a className="icon-btn round-icon" href="#cuenta" aria-label="Cuenta de usuario">
             <User size={20} />
           </a>
         </div>
@@ -413,7 +408,7 @@ export default function App() {
       <section className="gallery accessories">
         <div className="gallery-head">
           <p className="eyebrow">Carrusel 02</p>
-          <h2>Accesorios de cafetería en casa</h2>
+          <h2>Accesorios de preparación</h2>
           <p>Drippers, molinos, teteras y equipos para elevar la preparación diaria.</p>
         </div>
         {renderCarousel(accessories, accessoriesRef, 'Carrusel de accesorios')}
