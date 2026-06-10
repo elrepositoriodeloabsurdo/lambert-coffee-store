@@ -53,9 +53,52 @@ type PaymentMethod = 'tuu' | 'transbank' | 'transfer';
 const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '56912345678';
 const tuuCheckoutUrl = import.meta.env.VITE_TUU_CHECKOUT_URL || '';
 const transbankCheckoutUrl = import.meta.env.VITE_TRANSBANK_CHECKOUT_URL || '';
-const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL || '';
+const defaultHeroVideoUrl = 'https://youtube.com/shorts/crgnHwaZSkc?feature=share';
+const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL || defaultHeroVideoUrl;
+
+type HeroVideoConfig =
+  | { type: 'youtube'; src: string }
+  | { type: 'video'; src: string };
+
+const getHeroVideoConfig = (url: string): HeroVideoConfig | null => {
+  if (!url) return null;
+
+  try {
+    const parsedUrl = new URL(url);
+    const isYouTubeHost = ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be'].includes(parsedUrl.hostname);
+
+    if (isYouTubeHost) {
+      const videoId = parsedUrl.hostname === 'youtu.be'
+        ? parsedUrl.pathname.split('/').filter(Boolean)[0]
+        : parsedUrl.pathname.startsWith('/shorts/')
+          ? parsedUrl.pathname.split('/').filter(Boolean)[1]
+          : parsedUrl.searchParams.get('v');
+
+      if (videoId) {
+        const embedUrl = new URL(`https://www.youtube.com/embed/${videoId}`);
+        embedUrl.searchParams.set('autoplay', '1');
+        embedUrl.searchParams.set('mute', '1');
+        embedUrl.searchParams.set('loop', '1');
+        embedUrl.searchParams.set('playlist', videoId);
+        embedUrl.searchParams.set('playsinline', '1');
+        embedUrl.searchParams.set('controls', '0');
+        embedUrl.searchParams.set('modestbranding', '1');
+        embedUrl.searchParams.set('rel', '0');
+
+        return { type: 'youtube', src: embedUrl.toString() };
+      }
+    }
+  } catch {
+    return { type: 'video', src: url };
+  }
+
+  return { type: 'video', src: url };
+};
+
+const heroVideo = getHeroVideoConfig(heroVideoUrl);
 
 const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
+const repoUploadedImage = (filename: string) => `/assets/${filename}`;
 
 const products: Product[] = [
   {
@@ -67,7 +110,7 @@ const products: Product[] = [
     profile: 'Chocolate, miel y caramelo',
     description: 'Café arábica de especialidad con dulzor balanceado, notas de chocolate y final acaramelado.',
     roast: 'Medio',
-    image: '/assets/arabica-crema.jpg',
+    image: repoUploadedImage('watermarked_img_11321665646606839912.jpg'),
     stock: 15,
     prices: coffeePrices,
   },
@@ -80,7 +123,7 @@ const products: Product[] = [
     profile: 'Chocolate y naranja',
     description: 'Café de origen colombiano con acidez elegante, cuerpo sedoso y final dulce para filtrados premium.',
     roast: 'Medio claro',
-    image: '/assets/colombia-huila-amarillo.png',
+    image: repoUploadedImage('watermarked_img_11539890353660775228.jpg'),
     stock: 18,
     prices: coffeePrices,
   },
@@ -93,7 +136,7 @@ const products: Product[] = [
     profile: 'Chocolate, avellana y frutos secos',
     description: 'Robusta de especialidad con mayor cuerpo, potencia y rendimiento para espresso clásico.',
     roast: 'Alto',
-    image: '/assets/robusta-blanco.jpg',
+    image: repoUploadedImage('watermarked_img_3758094186528968053.jpg'),
     stock: 12,
     prices: coffeePrices,
   },
@@ -106,7 +149,7 @@ const products: Product[] = [
     profile: 'Chocolate, miel, avellana y caramelo',
     description: 'Blend intenso y cremoso con equilibrio entre dulzor arábica y cuerpo robusta.',
     roast: 'Medio alto',
-    image: '/assets/blend-dorado.jpg',
+    image: repoUploadedImage('watermarked_img_6231043378607359984.jpg'),
     stock: 20,
     prices: coffeePrices,
   },
@@ -119,7 +162,7 @@ const products: Product[] = [
     profile: 'Cacao, miel y caramelo',
     description: 'Mezcla latinoamericana balanceada para uso diario con crema estable y sabor persistente.',
     roast: 'Medio',
-    image: '/assets/blend-latinoamericano-dorado.jpg',
+    image: repoUploadedImage('watermarked_img_8512971140518397507.jpg'),
     stock: 24,
     prices: coffeePrices,
   },
@@ -356,11 +399,6 @@ export default function App() {
           <img src="/assets/logo-lambert.jpg" alt="Lambert Coffee" />
           <span>Lambert Coffee</span>
         </a>
-        <div className="topbar-links" aria-label="Navegación principal">
-          <a href="#catalogo">Catálogo</a>
-          <a href="#ia-stock">IA y Stock</a>
-          <a href="#checkout">Checkout</a>
-        </div>
         <div className="topbar-actions">
           <a className="icon-btn header-cart" href="#checkout" aria-label="Carrito de compra">
             <ShoppingBag size={20} />
@@ -384,8 +422,6 @@ export default function App() {
           />
         ) : heroVideo?.type === 'video' ? (
           <video className="hero-video" src={heroVideo.src} autoPlay muted loop playsInline aria-hidden="true" />
-        {heroVideoUrl ? (
-          <video className="hero-video" src={heroVideoUrl} autoPlay muted loop playsInline aria-hidden="true" />
         ) : (
           <div className="hero-video hero-brand-backdrop" aria-hidden="true">
             <span>LAMBERT COFFEE</span>

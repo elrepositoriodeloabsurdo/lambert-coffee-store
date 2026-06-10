@@ -92,34 +92,9 @@ textarea {
   text-transform: uppercase;
 }
 
-.topbar-links,
 .topbar-actions {
   align-items: center;
   display: flex;
-}
-
-.topbar-links {
-  gap: clamp(16px, 3vw, 28px);
-  left: 50%;
-  position: absolute;
-  transform: translateX(-50%);
-}
-
-.topbar-links a {
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  transition: 180ms ease;
-  white-space: nowrap;
-}
-
-.topbar-links a:hover {
-  color: var(--gold);
-}
-
-.topbar-actions {
   gap: 16px;
 }
 
@@ -966,10 +941,6 @@ footer {
 
   .brand span {
     font-size: 0.86rem;
-  }
-
-  .topbar-links {
-    display: none;
   }
 
   .topbar-actions {
