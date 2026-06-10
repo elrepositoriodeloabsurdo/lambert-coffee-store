@@ -198,8 +198,18 @@ textarea {
   border: 0;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 64%;
   width: 100%;
+}
+
+.hero-youtube-video {
+  border: 0;
+  height: max(100vh, 56.25vw);
+  left: 50%;
+  pointer-events: none;
+  top: 58%;
+  transform: translate(-50%, -50%);
+  width: max(177.78vh, 100vw);
 }
 
 .hero-brand-backdrop {

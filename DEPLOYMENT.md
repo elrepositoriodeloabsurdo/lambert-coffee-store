@@ -69,6 +69,7 @@ npm run build
    - `VITE_WHATSAPP_NUMBER` = Your WhatsApp number (without +)
    - `VITE_TUU_CHECKOUT_URL` = Your Tuu checkout link (optional)
    - `VITE_TRANSBANK_CHECKOUT_URL` = Your Transbank link (optional)
+   - `VITE_HERO_VIDEO_URL` = Your YouTube URL or public video file URL (optional)
 
 ---
 

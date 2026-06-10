@@ -97,6 +97,17 @@ const getHeroVideoConfig = (url: string): HeroVideoConfig | null => {
 
 const heroVideo = getHeroVideoConfig(heroVideoUrl);
 
+const getYoutubeEmbedUrl = (url: string) => {
+  const youtubeMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+
+  if (!youtubeMatch) {
+    return '';
+  }
+
+  const videoId = youtubeMatch[1];
+  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`;
+};
+
 const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
 
 const products: Product[] = [
@@ -104,12 +115,12 @@ const products: Product[] = [
     id: 'arabica-especialidad',
     name: 'Café de Especialidad Arábica',
     origin: 'Catuai Amarillo',
-    label: 'Empaque negro',
-    labelClass: 'dark-pack',
+    label: 'Empaque blanco crema',
+    labelClass: 'white-label',
     profile: 'Chocolate, miel y caramelo',
     description: 'Café arábica de especialidad con dulzor balanceado, notas de chocolate y final acaramelado.',
     roast: 'Medio',
-    image: '/assets/arabica-crema.jpg',
+    image: '/assets/arabico-crema.jpg.png',
     stock: 15,
     prices: coffeePrices,
   },
@@ -122,7 +133,7 @@ const products: Product[] = [
     profile: 'Chocolate y naranja',
     description: 'Café de origen colombiano con acidez elegante, cuerpo sedoso y final dulce para filtrados premium.',
     roast: 'Medio claro',
-    image: '/assets/colombia-huila-amarillo.png',
+    image: '/assets/huila-dorado.jpg',
     stock: 18,
     prices: coffeePrices,
   },
@@ -135,7 +146,7 @@ const products: Product[] = [
     profile: 'Chocolate, avellana y frutos secos',
     description: 'Robusta de especialidad con mayor cuerpo, potencia y rendimiento para espresso clásico.',
     roast: 'Alto',
-    image: '/assets/robusta-blanco.jpg',
+    image: '/assets/watermarked_img_3758094186528968053.jpg',
     stock: 12,
     prices: coffeePrices,
   },
@@ -148,7 +159,7 @@ const products: Product[] = [
     profile: 'Chocolate, miel, avellana y caramelo',
     description: 'Blend intenso y cremoso con equilibrio entre dulzor arábica y cuerpo robusta.',
     roast: 'Medio alto',
-    image: '/assets/blend-dorado.jpg',
+    image: '/assets/blend-latinoamericano-dorado.jpg',
     stock: 20,
     prices: coffeePrices,
   },
@@ -161,7 +172,7 @@ const products: Product[] = [
     profile: 'Cacao, miel y caramelo',
     description: 'Mezcla latinoamericana balanceada para uso diario con crema estable y sabor persistente.',
     roast: 'Medio',
-    image: '/assets/blend-latinoamericano-dorado.jpg',
+    image: '/assets/blend-latinoamericano-dorado.jpg.jpg',
     stock: 24,
     prices: coffeePrices,
   },
@@ -359,6 +370,8 @@ export default function App() {
     .filter(Boolean)
     .join('%0A');
 
+  const youtubeEmbedUrl = getYoutubeEmbedUrl(heroVideoUrl);
+
   const checkoutHref =
     paymentMethod === 'tuu'
       ? tuuCheckoutUrl || `https://wa.me/${whatsappNumber}?text=${whatsappMessage}%0A%0AMétodo: TUU`
@@ -415,6 +428,17 @@ export default function App() {
       </nav>
 
       <section id="inicio" className="hero">
+        {youtubeEmbedUrl ? (
+          <iframe
+            className="hero-video hero-youtube-video"
+            src={youtubeEmbedUrl}
+            title="Video de portada Lambert Coffee"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            referrerPolicy="strict-origin-when-cross-origin"
+            aria-hidden="true"
+          />
+        ) : heroVideoUrl ? (
+          <video className="hero-video" src={heroVideoUrl} autoPlay muted loop playsInline aria-hidden="true" />
         {heroVideo?.type === 'youtube' ? (
           <iframe
             className="hero-video"
