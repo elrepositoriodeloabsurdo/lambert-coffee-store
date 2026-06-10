@@ -53,6 +53,49 @@ type PaymentMethod = 'tuu' | 'transbank' | 'transfer';
 const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '56912345678';
 const tuuCheckoutUrl = import.meta.env.VITE_TUU_CHECKOUT_URL || '';
 const transbankCheckoutUrl = import.meta.env.VITE_TRANSBANK_CHECKOUT_URL || '';
+const defaultHeroVideoUrl = 'https://youtube.com/shorts/crgnHwaZSkc?feature=share';
+const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL || defaultHeroVideoUrl;
+
+type HeroVideoConfig =
+  | { type: 'youtube'; src: string }
+  | { type: 'video'; src: string };
+
+const getHeroVideoConfig = (url: string): HeroVideoConfig | null => {
+  if (!url) return null;
+
+  try {
+    const parsedUrl = new URL(url);
+    const isYouTubeHost = ['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be'].includes(parsedUrl.hostname);
+
+    if (isYouTubeHost) {
+      const videoId = parsedUrl.hostname === 'youtu.be'
+        ? parsedUrl.pathname.split('/').filter(Boolean)[0]
+        : parsedUrl.pathname.startsWith('/shorts/')
+          ? parsedUrl.pathname.split('/').filter(Boolean)[1]
+          : parsedUrl.searchParams.get('v');
+
+      if (videoId) {
+        const embedUrl = new URL(`https://www.youtube.com/embed/${videoId}`);
+        embedUrl.searchParams.set('autoplay', '1');
+        embedUrl.searchParams.set('mute', '1');
+        embedUrl.searchParams.set('loop', '1');
+        embedUrl.searchParams.set('playlist', videoId);
+        embedUrl.searchParams.set('playsinline', '1');
+        embedUrl.searchParams.set('controls', '0');
+        embedUrl.searchParams.set('modestbranding', '1');
+        embedUrl.searchParams.set('rel', '0');
+
+        return { type: 'youtube', src: embedUrl.toString() };
+      }
+    }
+  } catch {
+    return { type: 'video', src: url };
+  }
+
+  return { type: 'video', src: url };
+};
+
+const heroVideo = getHeroVideoConfig(heroVideoUrl);
 
 const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
 
@@ -369,11 +412,24 @@ export default function App() {
       </nav>
 
       <section id="inicio" className="hero">
-        <div className="hero-video hero-brand-backdrop" aria-hidden="true">
-          <span>LAMBERT COFFEE</span>
-          <span>LAMBERT COFFEE</span>
-          <span>LAMBERT COFFEE</span>
-        </div>
+        {heroVideo?.type === 'youtube' ? (
+          <iframe
+            className="hero-video"
+            src={heroVideo.src}
+            title="Lambert Coffee hero video"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            aria-hidden="true"
+          />
+        ) : heroVideo?.type === 'video' ? (
+          <video className="hero-video" src={heroVideo.src} autoPlay muted loop playsInline aria-hidden="true" />
+        ) : (
+          <div className="hero-video hero-brand-backdrop" aria-hidden="true">
+            <span>LAMBERT COFFEE</span>
+            <span>LAMBERT COFFEE</span>
+            <span>LAMBERT COFFEE</span>
+          </div>
+        )}
         <div className="hero-overlay" />
         <div className="hero-content">
           <p className="eyebrow">Café de especialidad premium</p>

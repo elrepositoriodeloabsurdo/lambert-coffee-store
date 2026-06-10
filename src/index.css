@@ -170,7 +170,10 @@ textarea {
 }
 
 .hero-video {
+  border: 0;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
   width: 100%;
 }
 
