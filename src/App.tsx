@@ -96,6 +96,7 @@ const getHeroVideoConfig = (url: string): HeroVideoConfig | null => {
 };
 
 const heroVideo = getHeroVideoConfig(heroVideoUrl);
+const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL || '';
 
 const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
 
@@ -423,6 +424,8 @@ export default function App() {
           />
         ) : heroVideo?.type === 'video' ? (
           <video className="hero-video" src={heroVideo.src} autoPlay muted loop playsInline aria-hidden="true" />
+        {heroVideoUrl ? (
+          <video className="hero-video" src={heroVideoUrl} autoPlay muted loop playsInline aria-hidden="true" />
         ) : (
           <div className="hero-video hero-brand-backdrop" aria-hidden="true">
             <span>LAMBERT COFFEE</span>
