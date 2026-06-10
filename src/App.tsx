@@ -108,6 +108,17 @@ const getYoutubeEmbedUrl = (url: string) => {
   return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`;
 };
 
+const getYoutubeEmbedUrl = (url: string) => {
+  const youtubeMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+
+  if (!youtubeMatch) {
+    return '';
+  }
+
+  const videoId = youtubeMatch[1];
+  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1`;
+};
+
 const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
 
 const products: Product[] = [
@@ -517,7 +528,7 @@ export default function App() {
 
       <section id="productos" className="section product-section">
         <div className="section-heading">
-          <p className="eyebrow">Catálogo, precios e inventario</p>
+          <p className="eyebrow">Precios e inventario</p>
           <h2>Formatos predefinidos para todas las variedades</h2>
           <p>250 gr: $9.990 CLP · 500 gr: $18.990 CLP · 1 kg: $34.990 CLP</p>
         </div>
@@ -603,7 +614,7 @@ export default function App() {
       <section id="cuenta" className="section workflow-section">
         <div className="section-heading">
           <p className="eyebrow">Workflows y lógica de negocio</p>
-          <h2>Cuenta, carrito, checkout y post-compra</h2>
+          <h2>Cuenta, carrito y post-compra</h2>
         </div>
         <div className="workflow-grid">
           {workflowSteps.map((step) => {
@@ -822,9 +833,6 @@ export default function App() {
         <div className="footer-grid">
           <strong>Lambert Coffee</strong>
           <span>Dark mode · Amarillo/Dorado · Café de especialidad</span>
-          <a href="#ia-stock">
-            <PackageCheck size={16} /> Asistente IA y stock
-          </a>
         </div>
       </footer>
     </main>
