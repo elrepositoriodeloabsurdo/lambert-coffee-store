@@ -56,6 +56,9 @@ const tuuCheckoutUrl = import.meta.env.VITE_TUU_CHECKOUT_URL || '';
 const transbankCheckoutUrl = import.meta.env.VITE_TRANSBANK_CHECKOUT_URL || '';
 const defaultHeroVideoUrl = '/assets/lambert-hero.mp4';
 const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL?.trim() || defaultHeroVideoUrl;
+const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '56912345678';
+const tuuCheckoutUrl = import.meta.env.VITE_TUU_CHECKOUT_URL || '';
+const transbankCheckoutUrl = import.meta.env.VITE_TRANSBANK_CHECKOUT_URL || '';
 
 const coffeePrices = { '250g': 9990, '500g': 18990, '1kg': 34990 };
 
@@ -200,6 +203,45 @@ const teas: GalleryItem[] = [
     type: 'Ceylon Black Tea',
     color: 'Fruits / Nights',
     image: '/assets/te-basilur-magic-fruits.jpg',
+  },
+];
+
+const workflowSteps = [
+  { icon: KeyRound, title: 'Autenticación', text: 'Registro, correo de bienvenida, inicio de sesión y recuperación por email.' },
+  { icon: ShoppingBag, title: 'Carrito dinámico', text: 'Miniatura, variedad, formato, cantidades, valor unitario y subtotal actualizado.' },
+  { icon: Receipt, title: 'Facturación', text: 'Checkbox para solicitar factura con razón social, RUT empresa, giro y dirección tributaria.' },
+  { icon: Truck, title: 'Post-compra', text: 'Número de compra, boleta o factura por correo y tracking automático del pedido.' },
+
+const showcaseImages = [
+  {
+    src: '/assets/arabica-crema.jpg',
+    title: 'Arábica 100%',
+    text: 'Empaque negro premium con perfil chocolate, miel y caramelo.',
+  },
+  {
+    src: '/assets/colombia-huila-amarillo.png',
+    title: 'Colombia Huila',
+    text: 'Etiqueta dorada para origen Huila y taza con acidez elegante.',
+  },
+  {
+    src: '/assets/robusta-blanco.jpg',
+    title: 'Robusta',
+    text: 'Presentación de alto cuerpo para espresso clásico y mezclas.',
+  },
+  {
+    src: '/assets/blend-dorado.jpg',
+    title: 'Blend Brasileño',
+    text: 'Blend intenso con etiqueta negra, crema y notas a frutos secos.',
+  },
+  {
+    src: '/assets/blend-latinoamericano-dorado.jpg',
+    title: 'Blend Latinoamericano',
+    text: 'Selección regional con empaque dorado y perfil dulce.',
+  },
+  {
+    src: '/assets/etiweutas new.png',
+    title: 'Línea Lambert',
+    text: 'Vista de etiquetas y presentaciones para vitrina comercial.',
   },
 ];
 
@@ -389,6 +431,41 @@ export default function App() {
             </a>
           </div>
         </div>
+      </section>
+
+      <section id="catalogo" className="gallery">
+        <div className="gallery-head">
+          <p className="eyebrow">Carrusel 01</p>
+          <h2>Café de Especialidad</h2>
+          <p>Cinco variedades con etiquetas visuales por presentación, origen y formato.</p>
+      <section className="section showcase-section" aria-labelledby="showcase-title">
+        <div className="section-heading">
+          <p className="eyebrow">Imágenes integradas</p>
+          <h2 id="showcase-title">Packaging real Lambert en vitrina responsive</h2>
+          <p>Las fotografías del café quedan visibles como piezas protagonistas para desktop, tablet y móvil.</p>
+        </div>
+        <div className="showcase-grid">
+          {showcaseImages.map((image, index) => (
+            <article className={index === 0 ? 'showcase-card featured' : 'showcase-card'} key={image.src}>
+              <img src={image.src} alt={image.title} loading={index === 0 ? 'eager' : 'lazy'} />
+              <div>
+                <strong>{image.title}</strong>
+                <span>{image.text}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+        {renderCarousel(
+          products.map((product) => ({
+            id: product.id,
+            name: product.name,
+            type: product.origin,
+            color: product.label,
+            image: product.image,
+          })),
+          coffeeRef,
+          'Carrusel de café de especialidad',
+        )}
       </section>
 
       <section id="catalogo" className="gallery">
@@ -621,6 +698,11 @@ export default function App() {
                   value={customer.billingAddress}
                   onChange={(event) => setCustomer({ ...customer, billingAddress: event.target.value })}
                 />
+              </label>
+              <label className="checkbox-label wide">
+                <input type="checkbox" checked={invoiceRequested} onChange={(event) => setInvoiceRequested(event.target.checked)} />
+                Solicitar Factura
+              </label>
               </label>
               <label className="checkbox-label wide">
                 <input type="checkbox" checked={invoiceRequested} onChange={(event) => setInvoiceRequested(event.target.checked)} />

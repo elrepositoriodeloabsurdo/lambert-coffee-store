@@ -11,6 +11,9 @@
     "lint": "tsc --noEmit",
     "serve:local": "tsx server.ts",
     "deploy:local": "npm run build && npm run serve:local"
+    "deploy:local": "npm run build && npm run serve:local",
+    "build:github": "VITE_BASE_PATH=/${npm_package_name}/ npm run build",
+    "deploy:vercel": "npx vercel --prod"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",

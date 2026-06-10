@@ -20,6 +20,33 @@ Proyecto web React + Vite listo para catalogo, carrito y checkout inicial.
 
 El numero de WhatsApp de contacto queda fijo en el codigo como `+56912345678`, por lo que Vercel no necesita una variable `VITE_WHATSAPP_NUMBER` para compilar.
 
+
+## Deploy a GitHub y Vercel
+
+### GitHub Pages
+
+1. Sube este repositorio a GitHub y usa la rama `main`.
+2. En GitHub, entra a **Settings → Pages** y selecciona **GitHub Actions** como fuente.
+3. Cada push a `main` ejecutará `.github/workflows/deploy-github-pages.yml` y publicará el build en GitHub Pages.
+4. Para probar el build con base de GitHub Pages localmente:
+
+```bash
+npm run build:github
+```
+
+### Vercel
+
+1. Conecta el repositorio en Vercel como proyecto Vite.
+2. Build command: `npm run build`.
+3. Output directory: `dist`.
+4. Si usas CLI con sesión iniciada:
+
+```bash
+npm run deploy:vercel
+```
+
+Opcionalmente configura en Vercel las variables `VITE_WHATSAPP_NUMBER`, `VITE_TUU_CHECKOUT_URL` y `VITE_TRANSBANK_CHECKOUT_URL`. Si no existen, la app usa valores de demo para que el deploy no falle.
+
 ## Despliegue fullstack local
 
 Para ver el diseño en un servidor local que también expone APIs de prueba de inventario y órdenes:
