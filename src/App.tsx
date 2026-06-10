@@ -50,6 +50,12 @@ type CartItem = {
 
 type PaymentMethod = 'tuu' | 'transbank' | 'transfer';
 
+const whatsappContactNumber = '+56912345678';
+const whatsappNumber = whatsappContactNumber.replace('+', '');
+const tuuCheckoutUrl = import.meta.env.VITE_TUU_CHECKOUT_URL || '';
+const transbankCheckoutUrl = import.meta.env.VITE_TRANSBANK_CHECKOUT_URL || '';
+const defaultHeroVideoUrl = '/assets/lambert-hero.mp4';
+const heroVideoUrl = import.meta.env.VITE_HERO_VIDEO_URL?.trim() || defaultHeroVideoUrl;
 const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '56912345678';
 const tuuCheckoutUrl = import.meta.env.VITE_TUU_CHECKOUT_URL || '';
 const transbankCheckoutUrl = import.meta.env.VITE_TRANSBANK_CHECKOUT_URL || '';
@@ -200,6 +206,11 @@ const teas: GalleryItem[] = [
   },
 ];
 
+const workflowSteps = [
+  { icon: KeyRound, title: 'Autenticación', text: 'Registro, correo de bienvenida, inicio de sesión y recuperación por email.' },
+  { icon: ShoppingBag, title: 'Carrito dinámico', text: 'Miniatura, variedad, formato, cantidades, valor unitario y subtotal actualizado.' },
+  { icon: Receipt, title: 'Facturación', text: 'Checkbox para solicitar factura con razón social, RUT empresa, giro y dirección tributaria.' },
+  { icon: Truck, title: 'Post-compra', text: 'Número de compra, boleta o factura por correo y tracking automático del pedido.' },
 
 const showcaseImages = [
   {
@@ -393,7 +404,10 @@ export default function App() {
       </nav>
 
       <section id="inicio" className="hero">
-        <video className="hero-video" src="/assets/lambert-hero.mp4" autoPlay muted loop playsInline />
+        <video className="hero-video" autoPlay muted loop playsInline>
+          <source src={heroVideoUrl} type="video/mp4" />
+          Tu navegador no puede reproducir el video de portada.
+        </video>
         <div className="hero-overlay" />
         <div className="hero-logo-card">
           <img src="/assets/logo-lambert.jpg" alt="Logo Lambert Coffee" />
@@ -419,6 +433,11 @@ export default function App() {
         </div>
       </section>
 
+      <section id="catalogo" className="gallery">
+        <div className="gallery-head">
+          <p className="eyebrow">Carrusel 01</p>
+          <h2>Café de Especialidad</h2>
+          <p>Cinco variedades con etiquetas visuales por presentación, origen y formato.</p>
       <section className="section showcase-section" aria-labelledby="showcase-title">
         <div className="section-heading">
           <p className="eyebrow">Imágenes integradas</p>
@@ -436,6 +455,17 @@ export default function App() {
             </article>
           ))}
         </div>
+        {renderCarousel(
+          products.map((product) => ({
+            id: product.id,
+            name: product.name,
+            type: product.origin,
+            color: product.label,
+            image: product.image,
+          })),
+          coffeeRef,
+          'Carrusel de café de especialidad',
+        )}
       </section>
 
       <section id="catalogo" className="gallery">
@@ -668,6 +698,11 @@ export default function App() {
                   value={customer.billingAddress}
                   onChange={(event) => setCustomer({ ...customer, billingAddress: event.target.value })}
                 />
+              </label>
+              <label className="checkbox-label wide">
+                <input type="checkbox" checked={invoiceRequested} onChange={(event) => setInvoiceRequested(event.target.checked)} />
+                Solicitar Factura
+              </label>
               </label>
               <label className="checkbox-label wide">
                 <input type="checkbox" checked={invoiceRequested} onChange={(event) => setInvoiceRequested(event.target.checked)} />

@@ -66,7 +66,6 @@ npm run build
 **In Vercel Dashboard:**
 1. Go to Project Settings → Environment Variables
 2. Add each variable:
-   - `VITE_WHATSAPP_NUMBER` = Your WhatsApp number (without +)
    - `VITE_TUU_CHECKOUT_URL` = Your Tuu checkout link (optional)
    - `VITE_TRANSBANK_CHECKOUT_URL` = Your Transbank link (optional)
 
@@ -74,7 +73,6 @@ npm run build
 
 ## Pre-Deployment Checklist
 
-- [ ] Update `VITE_WHATSAPP_NUMBER` in `.env.local` with real number
 - [ ] Test locally: `npm run dev`
 - [ ] Check build: `npm run build`
 - [ ] Preview build: `npm run preview`
