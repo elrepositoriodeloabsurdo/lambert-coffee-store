@@ -372,7 +372,6 @@ export default function App() {
       <section id="catalogo" className="gallery">
         <div className="gallery-head">
           <h2>Café de Especialidad</h2>
-          <p>Cinco variedades con etiquetas visuales por presentación, origen y formato.</p>
         </div>
         {renderCarousel(
           products.map((product) => ({
