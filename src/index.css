@@ -245,7 +245,6 @@ h3 {
   line-height: 1;
 }
 
-.hero-copy,
 .gallery-head p,
 .section-heading p,
 .contact-section p,
@@ -259,11 +258,6 @@ h3 {
   line-height: 1.7;
 }
 
-.hero-copy {
-  max-width: 650px;
-}
-
-.hero-actions,
 .checkout-actions {
   display: flex;
   flex-wrap: wrap;
@@ -362,23 +356,6 @@ h3 {
   scroll-snap-align: start;
 }
 
-.carousel-img {
-  align-items: center;
-  background:
-    radial-gradient(circle at 50% 26%, rgba(240, 195, 90, 0.14), transparent 58%),
-    #080706;
-  display: flex;
-  height: 310px;
-  justify-content: center;
-  padding: 16px;
-}
-
-.carousel-img img {
-  filter: drop-shadow(0 24px 28px rgba(0, 0, 0, 0.45));
-  height: 100%;
-  object-fit: contain;
-  width: 100%;
-}
 
 .carousel-card figcaption {
   display: grid;
