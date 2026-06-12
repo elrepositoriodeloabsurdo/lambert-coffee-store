@@ -557,6 +557,10 @@ h3 {
   padding: clamp(24px, 4vw, 44px);
 }
 
+.intelligence-section .ai-card .eyebrow {
+  font-size: 0.56rem;
+}
+
 .stock-board {
   display: grid;
   gap: 12px;
@@ -821,10 +825,13 @@ textarea:focus {
 }
 
 .float-btn {
+  align-items: flex-start;
   border-radius: 999px;
   box-shadow: var(--shadow);
+  display: inline-flex;
   font-weight: 900;
-  justify-content: center;
+  gap: 10px;
+  justify-content: flex-start;
   min-height: 48px;
   padding: 0 18px;
 }
@@ -838,6 +845,8 @@ textarea:focus {
 .whatsapp-float {
   background: #25d366;
   color: #061207;
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-weight: normal;
 }
 
 footer {
