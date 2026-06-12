@@ -321,9 +321,6 @@ export default function App() {
       <div className="carousel-track" ref={ref}>
         {items.map((item) => (
           <figure className="carousel-card" key={item.id}>
-            <div className="carousel-img">
-              <img src={item.image} alt={`${item.name} ${item.color}`} />
-            </div>
             <figcaption>
               <span className="carousel-type">{item.type}</span>
               <strong>{item.name}</strong>
@@ -369,28 +366,12 @@ export default function App() {
         <div className="hero-content">
           <p className="eyebrow">Café de especialidad premium</p>
           <h1>Elegancia oscura, sabor dorado.</h1>
-          <p className="hero-copy">
-            Lambert Coffee reúne cafés de origen, accesorios de cafetería en casa y selección de té en una experiencia
-            dark mode con acentos dorados, compra rápida y seguimiento post-compra.
-          </p>
-          <div className="hero-actions">
-            <a className="primary-btn" href="#productos">
-              <ShoppingBag size={18} />
-              Comprar café
-            </a>
-            <a className="secondary-btn" href="#checkout">
-              <CreditCard size={18} />
-              Ver pago y envío
-            </a>
-          </div>
         </div>
       </section>
 
       <section id="catalogo" className="gallery">
         <div className="gallery-head">
-          <p className="eyebrow">Carrusel 01</p>
           <h2>Café de Especialidad</h2>
-          <p>Cinco variedades con etiquetas visuales por presentación, origen y formato.</p>
         </div>
         {renderCarousel(
           products.map((product) => ({
@@ -407,7 +388,6 @@ export default function App() {
 
       <section className="gallery accessories">
         <div className="gallery-head">
-          <p className="eyebrow">Carrusel 02</p>
           <h2>Accesorios de preparación</h2>
           <p>Drippers, molinos, teteras y equipos para elevar la preparación diaria.</p>
         </div>
@@ -416,7 +396,6 @@ export default function App() {
 
       <section className="gallery teas">
         <div className="gallery-head">
-          <p className="eyebrow">Carrusel 03</p>
           <h2>Selección de té</h2>
           <p>Colecciones premium para complementar la experiencia Lambert.</p>
         </div>
