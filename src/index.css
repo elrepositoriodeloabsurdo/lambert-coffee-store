@@ -354,6 +354,27 @@ h3 {
   margin: 0;
   overflow: hidden;
   scroll-snap-align: start;
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.photo-gallery .carousel-card {
+  background-size: cover;
+  background-position: center;
+}
+
+.photo-gallery .carousel-card figcaption {
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.9) 100%);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 
