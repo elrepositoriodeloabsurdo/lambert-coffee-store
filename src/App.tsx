@@ -175,9 +175,9 @@ const accessories: GalleryItem[] = [
 const teas: GalleryItem[] = [
   {
     id: 'te-blue-collection',
-    name: 'Basilur Blue Tea',
+    name: 'Basilur Box&nbsp; Tea',
     type: 'Té verde premium',
-    color: 'Blue Collection',
+    color: 'Black Collection',
     image: '/assets/te-basilur-blue-collection.jpg',
   },
   {
@@ -463,8 +463,6 @@ export default function App() {
 
       <section id="cuenta" className="section workflow-section">
         <div className="section-heading">
-          <p className="eyebrow">Workflows y lógica de negocio</p>
-          <h2>Cuenta, carrito, checkout y post-compra</h2>
         </div>
         <div className="workflow-grid">
           {workflowSteps.map((step) => {
