@@ -402,6 +402,7 @@ export default function App() {
         {renderCarousel(teas, teasRef, 'Carrusel de té')}
       </section>
 
+
       <section id="productos" className="section product-section">
         <div className="section-heading">
           <p className="eyebrow">Catálogo, precios e inventario</p>
