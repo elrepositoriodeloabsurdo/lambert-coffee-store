@@ -203,44 +203,6 @@ const teas: GalleryItem[] = [
   },
 ];
 
-const gallery: GalleryItem[] = [
-  {
-    id: 'gallery-1',
-    name: 'Momento Café',
-    type: 'Experiencia',
-    color: 'Nuestro espacio',
-    image: '/assets/watermarked_img_11321665646606839912.jpg',
-  },
-  {
-    id: 'gallery-2',
-    name: 'Preparación',
-    type: 'Arte',
-    color: 'Craft coffee',
-    image: '/assets/watermarked_img_11539890353660775228.jpg',
-  },
-  {
-    id: 'gallery-3',
-    name: 'Detalles',
-    type: 'Calidad',
-    color: 'Premium',
-    image: '/assets/watermarked_img_3758094186528968053.jpg',
-  },
-  {
-    id: 'gallery-4',
-    name: 'Ambiente',
-    type: 'Atmósfera',
-    color: 'Cozy vibes',
-    image: '/assets/watermarked_img_6231043378607359984.jpg',
-  },
-  {
-    id: 'gallery-5',
-    name: 'Comunidad',
-    type: 'Cultura',
-    color: 'Para compartir',
-    image: '/assets/watermarked_img_8512971140518397507.jpg',
-  },
-];
-
 const workflowSteps = [
   { icon: KeyRound, title: 'Autenticación', text: 'Registro, correo de bienvenida, inicio de sesión y recuperación por email.' },
   { icon: ShoppingBag, title: 'Carrito dinámico', text: 'Miniatura, variedad, formato, cantidades, valor unitario y subtotal actualizado.' },
@@ -262,7 +224,6 @@ export default function App() {
   const coffeeRef = useRef<HTMLDivElement>(null);
   const accessoriesRef = useRef<HTMLDivElement>(null);
   const teasRef = useRef<HTMLDivElement>(null);
-  const galleryRef = useRef<HTMLDivElement>(null);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('tuu');
   const [invoiceRequested, setInvoiceRequested] = useState(false);
   const [legalAccepted, setLegalAccepted] = useState(false);
@@ -352,18 +313,14 @@ export default function App() {
         ? transbankCheckoutUrl || `https://wa.me/${whatsappNumber}?text=${whatsappMessage}%0A%0AMétodo: Webpay Plus`
         : `https://wa.me/${whatsappNumber}?text=${whatsappMessage}%0A%0AMétodo: Transferencia bancaria`;
 
-  const renderCarousel = (items: GalleryItem[], ref: React.RefObject<HTMLDivElement | null>, label: string, isPhotoGallery: boolean = false) => (
+  const renderCarousel = (items: GalleryItem[], ref: React.RefObject<HTMLDivElement | null>, label: string) => (
     <div className="carousel" aria-label={label}>
       <button type="button" className="carousel-nav prev" onClick={() => scrollCarousel(ref, 3, -1)} aria-label="Anterior">
         <ChevronLeft size={22} />
       </button>
       <div className="carousel-track" ref={ref}>
         {items.map((item) => (
-          <figure
-            className={`carousel-card ${isPhotoGallery ? 'photo-card' : ''}`}
-            key={item.id}
-            style={isPhotoGallery ? { backgroundImage: `url(${item.image})` } : {}}
-          >
+          <figure className="carousel-card" key={item.id}>
             <figcaption>
               <span className="carousel-type">{item.type}</span>
               <strong>{item.name}</strong>
@@ -445,13 +402,6 @@ export default function App() {
         {renderCarousel(teas, teasRef, 'Carrusel de té')}
       </section>
 
-      <section className="gallery photo-gallery">
-        <div className="gallery-head">
-          <h2>Galería Lambert</h2>
-          <p>Momentos, arte y experiencias que definen nuestro espacio.</p>
-        </div>
-        {renderCarousel(gallery, galleryRef, 'Galería fotográfica', true)}
-      </section>
 
       <section id="productos" className="section product-section">
         <div className="section-heading">
