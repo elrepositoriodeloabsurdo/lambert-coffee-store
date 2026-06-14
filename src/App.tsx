@@ -352,13 +352,9 @@ export default function App() {
           Tu navegador no puede reproducir el video de portada.
         </video>
         <div className="hero-overlay" />
-        <div className="hero-logo-card">
-          <img src="/assets/logo-lambert.jpg" alt="Logo Lambert Coffee" />
-          <span>Especialidad · Chile</span>
-        </div>
         <div className="hero-content">
           <p className="eyebrow">Café de especialidad premium</p>
-          <h1>Elegancia oscura, sabor dorado.</h1>
+          <h1 style={{ maxWidth: '500px', flexGrow: 0, alignSelf: 'stretch', width: 'auto', height: 'auto' }}>LAMBERT COFFEE</h1>
         </div>
       </section>
 
@@ -394,6 +390,7 @@ export default function App() {
         </div>
         {renderCarousel(teas, teasRef, 'Carrusel de té')}
       </section>
+
 
       <section id="productos" className="section product-section">
         <div className="section-heading">
