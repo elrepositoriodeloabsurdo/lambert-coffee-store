@@ -316,6 +316,7 @@ export default function App() {
       <div className="carousel-track" ref={ref}>
         {items.map((item) => (
           <figure className="carousel-card" key={item.id}>
+            <img src={item.image} alt={item.name} />
             <figcaption>
               <span className="carousel-type">{item.type}</span>
               <strong>{item.name}</strong>

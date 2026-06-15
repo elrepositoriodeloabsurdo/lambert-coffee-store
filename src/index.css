@@ -357,8 +357,15 @@ h3 {
   margin: 0;
   overflow: hidden;
   scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
 }
 
+.carousel-card img {
+  height: 240px;
+  object-fit: cover;
+  width: 100%;
+}
 
 .carousel-card figcaption {
   display: grid;
