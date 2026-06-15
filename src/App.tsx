@@ -50,8 +50,10 @@ type CartItem = {
 
 type PaymentMethod = 'tuu' | 'transbank' | 'transfer';
 
-const whatsappContactNumber = '+56912345678';
+const whatsappContactNumber = '+56963153117';
 const whatsappNumber = whatsappContactNumber.replace('+', '');
+const instagramUrl = 'https://www.instagram.com/lambert.coffee/';
+const shopLocation = 'Feria Artesanal Brisas del Mar, Avenida del Mar 4400, La Serena, Local 19A';
 const tuuCheckoutUrl = import.meta.env.VITE_TUU_CHECKOUT_URL || '';
 const transbankCheckoutUrl = import.meta.env.VITE_TRANSBANK_CHECKOUT_URL || '';
 const defaultHeroVideoUrl = '/assets/lambert-hero.mp4';
@@ -679,6 +681,10 @@ export default function App() {
           <a href="#ia-stock">
             <PackageCheck size={16} /> Asistente IA y stock
           </a>
+          <a href={instagramUrl} target="_blank" rel="noreferrer" aria-label="Síguenos en Instagram">
+            Instagram
+          </a>
+          <span className="footer-location">{shopLocation}</span>
         </div>
       </footer>
     </main>

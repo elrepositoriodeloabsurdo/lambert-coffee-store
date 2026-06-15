@@ -860,6 +860,12 @@ footer {
   color: var(--gold);
 }
 
+.footer-location {
+  font-size: 0.85rem;
+  color: var(--muted);
+  flex-basis: 100%;
+}
+
 @media (max-width: 1180px) {
   .product-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
