@@ -661,9 +661,6 @@ export default function App() {
             factura al correo del cliente y despachar el enlace de seguimiento del pedido.
           </p>
         </div>
-        <a className="icon-action" href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">
-          <MessageCircle size={18} /> Hablar por WhatsApp
-        </a>
       </section>
 
       <div className="floating-actions" aria-label="Accesos rápidos">
